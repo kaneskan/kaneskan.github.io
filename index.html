@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<head>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  padding: 10px;
+  background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 20px;
+  text-align: center;
+  background: white;
+}
+
+.header h1 {
+  font-size: 30px;
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+  float: left;
+  width: 75%;
+}
+
+#chart {
+  text-align: center;
+  margin-top: 40px;
+}  
+  
+  
+  
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>CS498 Data Visualization</h1>
+  <p>D3 Coursework</p>
+</div>
+
+<div class="topnav">
+  <a href="https://kaneskan.github.io/">1</a>
+  <a href="https://kaneskan.github.io/index2.html">2</a>
+  <a href="#">3</a>
+  <a href="#" style="float:right">Link</a>
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <h2>Urbanization</h2>
+      <h5>How much urbanization has been growing?</h5>  
+      <div id="chart"></div>  
+      <div class="fakeimg" style="height:100px;">Image</div>
+      <p>Some text..</p>
+      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+  </div>
+<!--   <div class="rightcolumn">
+    <div class="card">
+      <h3>Follow Me</h3>
+      <p>Some text..</p>
+    </div>
+  </div> -->
+</div>
+
+<!-- <div class="footer">
+  <h2>Footer</h2>
+</div> -->
+
+  
+
+<script>    
+// Fake data
+var data = [
+  {
+    year: 2000,
+    popularity: 50
+  },
+  {
+    year: 2001,
+    popularity: 150
+  },
+  {
+    year: 2002,
+    popularity: 200
+  },
+  {
+    year: 2003,
+    popularity: 130
+  },
+  {
+    year: 2004,
+    popularity: 240
+  },
+  {
+    year: 2005,
+    popularity: 380
+  },
+  {
+    year: 2006,
+    popularity: 420
+  }
+];
+
+// Create SVG and padding for the chart
+
+const svg = d3
+  .select("#chart")
+  .append("svg")
+  .attr("height", 300)
+  .attr("width", 600);
+const margin = { top: 0, bottom: 20, left: 30, right: 20 };
+const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
+const width = +svg.attr("width") - margin.left - margin.right;
+const height = +svg.attr("height") - margin.top - margin.bottom;
+const grp = chart
+  .append("g")
+  .attr("transform", `translate(-${margin.left},-${margin.top})`);
+
+// Create scales
+const yScale = d3
+  .scaleLinear()
+  .range([height, 0])
+  .domain([0, d3.max(data, dataPoint => dataPoint.popularity)]);
+const xScale = d3
+  .scaleLinear()
+  .range([0, width])
+  .domain(d3.extent(data, dataPoint => dataPoint.year));
+
+const line = d3
+  .line()
+  .x(dataPoint => xScale(dataPoint.year))
+  .y(dataPoint => yScale(dataPoint.popularity));
+
+// Add path
+const path = grp
+  .append("path")
+  .attr("transform", `translate(${margin.left},0)`)
+  .datum(data)
+  .attr("fill", "none")
+  .attr("stroke", "steelblue")
+  .attr("stroke-linejoin", "round")
+  .attr("stroke-linecap", "round")
+  .attr("stroke-width", 1.5)
+  .attr("d", line);
+
+const pathLength = path.node().getTotalLength();
+// D3 provides lots of transition options, have a play around here:
+// https://github.com/d3/d3-transition
+const transitionPath = d3
+  .transition()
+  .ease(d3.easeSin)
+  .duration(2500);
+
+path
+  .attr("stroke-dashoffset", pathLength)
+  .attr("stroke-dasharray", pathLength)
+  .transition(transitionPath)
+  .attr("stroke-dashoffset", 0);
+
+// Add the X Axis
+chart
+  .append("g")
+  .attr("transform", `translate(0,${height})`)
+  .call(d3.axisBottom(xScale).ticks(data.length));
+// Add the Y Axis
+chart
+  .append("g")
+  .attr("transform", `translate(0, 0)`)
+  .call(d3.axisLeft(yScale));  
+</script>  
+</body>
+</html>
