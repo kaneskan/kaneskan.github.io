@@ -160,7 +160,6 @@ async function init() {
   const data = await d3.csv(
      'https://kaneskan.github.io/Urbanization.csv');
   
-  console.log(data);
   // Filter Data
   data.filter(function(d){ return d.Country_code == "WLD" })
   
