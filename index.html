@@ -190,7 +190,6 @@ body {
 
   const line = d3
     .line()
-    .filter(function(d){ return d.Country_code == "WLD";})
     .x(dataPoint => xScale(dataPoint.Year))
     .y(dataPoint => yScale(dataPoint.Urban_per));
 
@@ -199,6 +198,7 @@ body {
     .append("path")
     .attr("transform", `translate(${margin.left},0)`)
     .datum(data)
+    .filter(function(d){ return d.Country_code == "WLD";})
     .attr("fill", "none")
     .attr("stroke", "steelblue")
     .attr("stroke-linejoin", "round")
