@@ -160,6 +160,7 @@ async function init() {
   const data = await d3.csv(
      'https://kaneskan.github.io/Urbanization.csv');
   
+  console.log(data)
   // Filter Data
   data.filter(function(d){ return d.Country_code == "WLD" })
   
@@ -182,16 +183,16 @@ async function init() {
   const yScale = d3
     .scaleLinear()
     .range([height, 0])
-    .domain([0, d3.max(data, dataPoint => dataPoint.Math.round(Urban_per))]);
+    .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
   const xScale = d3
     .scaleLinear()
     .range([0, width])
-    .domain(d3.extent(data, dataPoint => dataPoint.Math.round(year)));
+    .domain(d3.extent(data, dataPoint => dataPoint.year));
 
   const line = d3
     .line()
-    .x(dataPoint => xScale(dataPoint.Math.round(year)))
-    .y(dataPoint => yScale(dataPoint.Math.round(Urban_per)));
+    .x(dataPoint => xScale(dataPoint.year))
+    .y(dataPoint => yScale(dataPoint.Urban_per));
 
   // Add path
   const path = grp
