@@ -160,8 +160,8 @@ body {
   const data = d3.csv(
      'https://kaneskan.github.io/Urbanization.csv');
   
-  // Filter Data
-  data = data.filter(function(d){ return d.Country_code == "WLD";});
+//   // Filter Data
+//   data = data.filter(function(d){ return d.Country_code == "WLD";});
   
   // Create SVG and padding for the chart
 
@@ -182,7 +182,7 @@ body {
   const yScale = d3
     .scaleLinear()
     .range([height, 0])
-    .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
+    .domain([0, 100]);
   const xScale = d3
     .scaleLinear()
     .range([0, width])
@@ -190,6 +190,7 @@ body {
 
   const line = d3
     .line()
+    .filter(function(d){ return d.Country_code == "WLD";})
     .x(dataPoint => xScale(dataPoint.Year))
     .y(dataPoint => yScale(dataPoint.Urban_per));
 
