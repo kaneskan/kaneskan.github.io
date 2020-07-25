@@ -187,11 +187,11 @@ async function init() {
   const xScale = d3
     .scaleLinear()
     .range([0, width])
-    .domain(d3.extent(data, dataPoint => dataPoint.year));
+    .domain(d3.extent(data, dataPoint => dataPoint.Year));
 
   const line = d3
     .line()
-    .x(dataPoint => xScale(dataPoint.year))
+    .x(dataPoint => xScale(dataPoint.Year))
     .y(dataPoint => yScale(dataPoint.Urban_per));
 
   // Add path
