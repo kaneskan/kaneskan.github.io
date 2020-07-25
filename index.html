@@ -157,9 +157,42 @@ body {
 <script>    
 // Load data
  
-const data = d3.csv(
-   'https://kaneskan.github.io/Urbanization.csv');
+// const data = d3.csv(
+//    'https://kaneskan.github.io/Urbanization.csv');
 
+var data = [
+  {
+    year: 2000,
+    popularity: 50
+  },
+  {
+    year: 2001,
+    popularity: 150
+  },
+  {
+    year: 2002,
+    popularity: 200
+  },
+  {
+    year: 2003,
+    popularity: 130
+  },
+  {
+    year: 2004,
+    popularity: 240
+  },
+  {
+    year: 2005,
+    popularity: 380
+  },
+  {
+    year: 2006,
+    popularity: 420
+  }
+];  
+  
+  
+  
 //   // Filter Data
 //   data = data.filter(function(d){ return d.Country_code == "WLD";});
 
@@ -182,16 +215,16 @@ const grp = chart
 const yScale = d3
   .scaleLinear()
   .range([height, 0])
-  .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
+  .domain([0, d3.max(data, dataPoint => dataPoint.popularity)]);
 const xScale = d3
   .scaleLinear()
   .range([0, width])
-  .domain(d3.extent(data, dataPoint => dataPoint.Year));
+  .domain(d3.extent(data, dataPoint => dataPoint.year));
 
 const line = d3
   .line()
-  .x(dataPoint => xScale(dataPoint.Year))
-  .y(dataPoint => yScale(dataPoint.Urban_per));
+  .x(dataPoint => xScale(dataPoint.year))
+  .y(dataPoint => yScale(dataPoint.popularity));
 
 // Add path
 const path = grp
