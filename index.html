@@ -179,7 +179,7 @@ async function init() {
   const yScale = d3
     .scaleLinear()
     .range([height, 0])
-    .domain([0, d3.max(data, dataPoint => dataPoint.popularity)]);
+    .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
   const xScale = d3
     .scaleLinear()
     .range([0, width])
@@ -188,7 +188,7 @@ async function init() {
   const line = d3
     .line()
     .x(dataPoint => xScale(dataPoint.year))
-    .y(dataPoint => yScale(dataPoint.popularity));
+    .y(dataPoint => yScale(dataPoint.Urban_per));
 
   // Add path
   const path = grp
