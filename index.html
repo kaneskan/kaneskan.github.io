@@ -115,8 +115,8 @@ body {
 }
 </style>
 </head>
-<body onload='init()'>
-
+<body>
+<!-- <body onload='init()'> -->
 <div class="header">
   <h1>CS498 Data Visualization</h1>
   <p>D3 Coursework</p>
@@ -156,8 +156,8 @@ body {
 
 <script>    
 // Load data
-async function init() {  
-  const data = await d3.csv(
+ 
+  const data = d3.csv(
      'https://kaneskan.github.io/Urbanization.csv');
   
 //   // Filter Data
@@ -229,7 +229,7 @@ async function init() {
     .append("g")
     .attr("transform", `translate(0, 0)`)
     .call(d3.axisLeft(yScale));
-  }
+  
 </script>  
 </body>
 </html>
