@@ -161,7 +161,7 @@ body {
      'https://kaneskan.github.io/Urbanization.csv');
   
   // Filter Data
-  data.filter(function(d){ return d.Country_code == "WLD"})
+  data = data.filter(function(d){ return d.Country_code == "WLD";});
   
   // Create SVG and padding for the chart
 
