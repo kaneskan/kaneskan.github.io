@@ -158,7 +158,7 @@ body {
 // Fake data
 async function init() {  
   const data = await d3.csv(
-     'https://github.com/kaneskan/kaneskan.github.io/Urbanization.csv');
+     'https://kaneskan.github.io/Urbanization.csv');
   
   // Filter Data
   data.filter(function(d){ return d.Country_name == "World" })
