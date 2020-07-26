@@ -184,7 +184,7 @@ async function init() {
     .range([height, 0])
     .domain([10, 90]);
 //     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
-  const xScale = d3.scaleLinear()
+  const xScale = d3.scaleTime()
     .range([0, width])
     .domain(d3.extent(data, dataPoint => dataPoint.Year));
 
