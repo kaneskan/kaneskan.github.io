@@ -210,19 +210,18 @@ async function init() {
 //     .attr("transform", `translate(${margin.left},0)`)
     .attr("fill", "none")
     .attr("stroke", function(d,i) { return color(i);})
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
+//     .attr("stroke-linejoin", "round")
+//     .attr("stroke-linecap", "round")
     .attr("stroke-width", 1.5)
     .attr("d", line);
 
-  const pathLength = 480;
-//   const pathLength = path.node().getTotalLength();
+  const pathLength = path.node().getTotalLength();
   // D3 provides lots of transition options, have a play around here:
   // https://github.com/d3/d3-transition
   const transitionPath = d3.transition()
     .selectAll("path")
-    .delay(function(d, i) { return i*10000;})
-    .duration(2500);
+    .delay(function(d, i) { return i*500;})
+    .duration(2000);
 //     .ease(d3.easeSin);
   
   path
