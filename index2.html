@@ -220,8 +220,8 @@ async function init() {
   // https://github.com/d3/d3-transition
   const transitionPath = d3.transition()
     .selectAll("path")
-    .delay(function(d, i) { return i*500;})
-    .duration(2500)
+    .delay(function(d, i) { return i*1000;})
+    .duration(1500)
     .ease(d3.easeSin);
   
   path
