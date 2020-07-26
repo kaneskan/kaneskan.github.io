@@ -177,8 +177,7 @@ async function init() {
   const height = +svg.attr("height") - margin.top - margin.bottom;
   const grp = chart
     .append("g")
-    .attr("transform", `translate(-40,-${margin.top})`);
-//     .attr("transform", `translate(-${margin.left},-${margin.top})`);
+    .attr("transform", `translate(-${margin.left},-${margin.top})`);
 
   // Create scales
   const yScale = d3.scaleLinear()
