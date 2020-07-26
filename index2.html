@@ -213,7 +213,7 @@ async function init() {
            data.filter(function(d){ return d.Country_code == "NAC";}),             
            data.filter(function(d){ return d.Country_code == "SAS";}),
            data.filter(function(d){ return d.Country_code == "SSF";})])             
-    .enter().append("line")
+    .enter().append("path")
     .attr("transform", `translate(${margin.left},0)`)
     .attr("fill", "none")
     .attr("stroke", function(d,i) { return color(i);})
