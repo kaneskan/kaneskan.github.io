@@ -214,13 +214,13 @@ async function init() {
   // Create scales
   const yScale = d3
     .scaleLinear()
-    .range([height+5, 0])
-    .domain([0, 100]);
+    .range([height, 0])
+    .domain([0, 105]);
 //     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
   const xScale = d3
     .scaleLinear()
-    .range([0, width-5])
-    .domain(d3.extent(data, dataPoint => dataPoint.Year));
+    .range([0, width])
+    .domain(d3.extent(data, dataPoint => dataPoint.Year)+5);
 
   const line = d3
     .line()
