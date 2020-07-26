@@ -203,7 +203,7 @@ async function init() {
   // Add path
   const path = grp
     .selectAll(".line")
-    .data([data.filter(function(d){ return d.Country_code == "WLD";}), 
+    .datum([data.filter(function(d){ return d.Country_code == "WLD";}), 
            data.filter(function(d){ return d.Country_code == "CEB";}),
            data.filter(function(d){ return d.Country_code == "EAS";}),
            data.filter(function(d){ return d.Country_code == "ECS";}),
