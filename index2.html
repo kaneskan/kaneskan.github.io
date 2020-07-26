@@ -225,8 +225,8 @@ async function init() {
 //     .ease(d3.easeSin);
   
   path
-    .attr("stroke-dashoffset", pathLength)
-//     .attr("stroke-dasharray", pathLength)
+//     .attr("stroke-dashoffset", pathLength)
+    .attr("stroke-dasharray", pathLength)
     .transition(transitionPath)
     .attr("stroke-dashoffset", 0);
 
