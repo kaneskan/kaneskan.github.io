@@ -176,8 +176,8 @@ async function init() {
   const width = +svg.attr("width") - margin.left - margin.right;
   const height = +svg.attr("height") - margin.top - margin.bottom;
   const grp = chart
-    .append("g")
-    .attr("transform", `translate(-${margin.left},-${margin.top})`);
+    .append("g");
+//     .attr("transform", `translate(-${margin.left},-${margin.top})`);
 
   // Create scales
   const yScale = d3.scaleLinear()
@@ -207,7 +207,7 @@ async function init() {
            data.filter(function(d){ return d.Country_code == "SAS";}),
            data.filter(function(d){ return d.Country_code == "SSF";})])             
     .enter().append("path")
-    .attr("transform", `translate(${margin.left},0)`)
+//     .attr("transform", `translate(${margin.left},0)`)
     .attr("fill", "none")
     .attr("stroke", function(d,i) { return color(i);})
     .attr("stroke-linejoin", "round")
