@@ -198,7 +198,7 @@ async function init() {
     .y(dataPoint => yScale(dataPoint.Urban_per));
 
   // Add path
-
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
   const path = grp
     .selectAll(".line")
 //     .append("path")
@@ -209,7 +209,7 @@ async function init() {
     .attr("transform", `translate(${margin.left},0)`)
 //     .datum(data.filter(function(d){ return d.Country_code == "LCN";}))
     .attr("fill", "none")
-    .attr("stroke", "steelblue")
+    .attr("stroke", d=>color(d))
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 1.5)
