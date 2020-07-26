@@ -201,7 +201,7 @@ async function init() {
   const path = grp
     .append("path")
     .attr("transform", `translate(${margin.left},0)`)
-    .data(data.filter(function(d){ return d.Country_code == "LCN";}), data.filter(function(d){ return d.Country_code == "WLD";}))
+    .data([data.filter(function(d){ return d.Country_code == "LCN";}), data.filter(function(d){ return d.Country_code == "WLD";})])
 //     .datum(data.filter(function(d){ return d.Country_code == "LCN";}))
     .attr("fill", "none")
     .attr("stroke", "steelblue")
