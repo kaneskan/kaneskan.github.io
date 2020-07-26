@@ -203,7 +203,7 @@ async function init() {
     .append("svg")
     .attr("height", 300)
     .attr("width", 600);
-  const margin = { top: 0, bottom: 20, left: 30, right: 20 };
+  const margin = { top: 20, bottom: 20, left: 30, right: 20 };
   const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
   const width = +svg.attr("width") - margin.left - margin.right;
   const height = +svg.attr("height") - margin.top - margin.bottom;
