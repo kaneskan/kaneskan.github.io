@@ -203,8 +203,6 @@ async function init() {
   // Add path
   const path = grp
     .selectAll(".line")
-//     .append("path")
-//     .attr("transform", `translate(${margin.left},0)`)
     .data([data.filter(function(d){ return d.Country_code == "WLD";}), 
            data.filter(function(d){ return d.Country_code == "CEB";}),
            data.filter(function(d){ return d.Country_code == "EAS";}),
@@ -228,8 +226,8 @@ async function init() {
   const transitionPath = d3
     .transition()
     .ease(d3.easeSin)
-    .duration(2500);
-//     .delay(function(d,i) { return i*500;});
+    .duration(10000)
+    .delay(function(d,i) { return i*500;});
   
   path
     .attr("stroke-dashoffset", pathLength)
