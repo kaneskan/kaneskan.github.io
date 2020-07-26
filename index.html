@@ -133,7 +133,7 @@ body {
       <h5>How much urbanization has been growing?</h5> 
       
       <div class="topnav">
-        <a href="https://kaneskan.github.io/">1</a>
+        <a href="https://kaneskan.github.io/index.html">1</a>
         <a href="https://kaneskan.github.io/index2.html">2</a>
         <a href="https://kaneskan.github.io/index3.html">3</a>
       <!--   <a href="#" style="float:right">Link</a> -->
@@ -201,7 +201,8 @@ async function init() {
   const path = grp
     .append("path")
     .attr("transform", `translate(${margin.left},0)`)
-    .datum(data.filter(function(d){ return d.Country_code == "LCN";}))
+    .data(data.filter(function(d){ return d.Country_code == "LCN";}), data.filter(function(d){ return d.Country_code == "WLD";}))
+//     .datum(data.filter(function(d){ return d.Country_code == "LCN";}))
     .attr("fill", "none")
     .attr("stroke", "steelblue")
     .attr("stroke-linejoin", "round")
