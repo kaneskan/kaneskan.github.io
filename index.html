@@ -258,7 +258,7 @@ async function init() {
     .append("g")
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(xScale).ticks(10)
-      .tickFormat(d3.time.format("%Y")));  
+      .tickFormat(d3.timeFormat("%Y")));  
   // Add the Y Axis
   chart
     .append("g")
