@@ -175,8 +175,8 @@ async function init() {
   const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
   const width = +svg.attr("width") - margin.left - margin.right;
   const height = +svg.attr("height") - margin.top - margin.bottom;
-  const grp = chart
-    .append("g");
+//   const grp = chart
+//     .append("g");
 //     .attr("transform", `translate(-${margin.left},-${margin.top})`);
 
   // Create scales
@@ -196,7 +196,7 @@ async function init() {
   const color = d3.scaleOrdinal(d3.schemeCategory10);  
   
   // Add path
-  const path = grp
+  const path = chart.append("g")
     .selectAll(".line")
     .data([data.filter(function(d){ return d.Country_code == "WLD";}), 
            data.filter(function(d){ return d.Country_code == "CEB";}),
