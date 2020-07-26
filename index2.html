@@ -163,8 +163,8 @@ body {
 <script>    
 // Load data
 async function init() { 
-  const data = await d3.csv(
-    'https://kaneskan.github.io/Urbanization.csv');
+  const data = await d3
+    .csv('https://kaneskan.github.io/Urbanization.csv');
 
   // Create SVG and padding for the chart
 
@@ -203,7 +203,7 @@ async function init() {
   // Add path
   const path = grp
     .selectAll(".line")
-    .datum([data.filter(function(d){ return d.Country_code == "WLD";}), 
+    .dat([data.filter(function(d){ return d.Country_code == "WLD";}), 
            data.filter(function(d){ return d.Country_code == "CEB";}),
            data.filter(function(d){ return d.Country_code == "EAS";}),
            data.filter(function(d){ return d.Country_code == "ECS";}),
@@ -225,9 +225,11 @@ async function init() {
   // https://github.com/d3/d3-transition
   const transitionPath = d3
     .transition()
-    .ease(d3.easeSin)
-    .duration(10000)
-    .delay(function(d,i) { return i*500;});
+    .delay(function(d,i) { return i*500;})
+    .duration(2500)
+    .ease(d3.easeSin);
+
+
   
   path
     .attr("stroke-dashoffset", pathLength)
