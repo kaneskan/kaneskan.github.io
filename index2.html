@@ -197,8 +197,10 @@ async function init() {
     .x(dataPoint => xScale(dataPoint.Year))
     .y(dataPoint => yScale(dataPoint.Urban_per));
 
+  // Create colors
+  const color = d3.scaleOrdinal(d3.schemeCategory10);  
+  
   // Add path
-  var color = d3.scaleOrdinal(d3.schemeCategory10);
   const path = grp
     .selectAll(".line")
 //     .append("path")
