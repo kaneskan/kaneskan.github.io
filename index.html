@@ -122,8 +122,8 @@ body {
 <!-- <body> -->
 <body onload='init()'>
 <div class="header">
-  <h1>CS498 Data Visualization</h1>
-  <p>D3 Coursework</p>
+  <h1>CS498 Data Visualization - D3 Coursework</h1>
+<!--   <p>D3 Coursework</p> -->
 </div>
     
 <div class="row">
@@ -139,8 +139,9 @@ body {
       <!--   <a href="#" style="float:right">Link</a> -->
       </div>
       
-      <div id="chart"></div>  
-      <div class="fakeimg" style="height:100px;">Image</div>
+<!--       <div id="chart"></div>  
+      <div class="fakeimg" style="height:100px;">Image</div> -->
+      
       <p>Some text..</p>
       <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
     </div>
@@ -164,10 +165,6 @@ body {
 async function init() { 
   const data = await d3.csv(
     'https://kaneskan.github.io/Urbanization.csv');
-
-
-  //   // Filter Data
-  //   data = data.filter(function(d){ return d.Country_code == "WLD";});
 
   // Create SVG and padding for the chart
 
