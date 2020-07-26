@@ -198,16 +198,21 @@ async function init() {
     .y(dataPoint => yScale(dataPoint.Urban_per));
 
   // Add path
-  const color = d3.scaleOrdinal(d3.schemeCategory10);
+  var color = d3.scaleOrdinal(d3.schemeCategory10);
   const path = grp
     .selectAll(".line")
 //     .append("path")
 //     .attr("transform", `translate(${margin.left},0)`)
-    .data([data.filter(function(d){ return d.Country_code == "LCN";}), 
-           data.filter(function(d){ return d.Country_code == "WLD";})])
+    .data([data.filter(function(d){ return d.Country_code == "WLD";}), 
+           data.filter(function(d){ return d.Country_code == "CEB";})])
+           data.filter(function(d){ return d.Country_code == "EAS";})])
+           data.filter(function(d){ return d.Country_code == "ECS";})])
+           data.filter(function(d){ return d.Country_code == "LCN";})])
+           data.filter(function(d){ return d.Country_code == "NAC";})])             
+           data.filter(function(d){ return d.Country_code == "SAS";})])
+           data.filter(function(d){ return d.Country_code == "SSF";})])             
     .enter().append("path")
     .attr("transform", `translate(${margin.left},0)`)
-//     .datum(data.filter(function(d){ return d.Country_code == "LCN";}))
     .attr("fill", "none")
     .attr("stroke", d=>color(d))
     .attr("stroke-linejoin", "round")
