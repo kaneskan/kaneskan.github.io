@@ -220,7 +220,7 @@ async function init() {
   const xScale = d3
     .scaleLinear()
     .range([0, width])
-    .domain(d3.extent(data, dataPoint => dataPoint.Year)+5);
+    .domain(d3.extent(data, dataPoint => dataPoint.Year));
 
   const line = d3
     .line()
