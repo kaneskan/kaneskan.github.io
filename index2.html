@@ -243,6 +243,10 @@ async function init() {
     .attr("transform", `translate(0, 0)`)
     .call(d3.axisLeft(yScale));
   
+  chart
+    .transition()
+    .delay(14000)
+    .remove();
   
   }
 </script>  
