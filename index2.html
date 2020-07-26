@@ -228,9 +228,9 @@ async function init() {
   const transitionPath = d3
     .transition()
     .ease(d3.easeSin)
-    .delay(function(d,i) { return i*500;})
-    .duration(2500);
-
+    .duration(2500)
+    .delay(function(d,i) { return i*500;});
+  
   path
     .attr("stroke-dashoffset", pathLength)
     .attr("stroke-dasharray", pathLength)
