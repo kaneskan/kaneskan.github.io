@@ -248,6 +248,10 @@ async function init() {
     .append("g")
     .attr("transform", `translate(0, 0)`)
     .call(d3.axisLeft(yScale));
+  
+  // Deselect 
+  d3.select("line[0]").html = "";
+  
   }
 </script>  
 </body>
