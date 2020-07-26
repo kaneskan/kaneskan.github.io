@@ -198,14 +198,14 @@ async function init() {
   // Add path
   const path = grp
     .selectAll(".line")
-    .data([data.filter(function(d){ return d.Country_code == "WLD";}), 
-           data.filter(function(d){ return d.Country_code == "CEB";}),
-           data.filter(function(d){ return d.Country_code == "EAS";}),
-           data.filter(function(d){ return d.Country_code == "ECS";}),
-           data.filter(function(d){ return d.Country_code == "LCN";}),
-           data.filter(function(d){ return d.Country_code == "NAC";}),             
-           data.filter(function(d){ return d.Country_code == "SAS";}),
-           data.filter(function(d){ return d.Country_code == "SSF";})])             
+    .data([data.filter(function(d){ return d.Country_code == "ECS";})]) 
+//            data.filter(function(d){ return d.Country_code == "CEB";}),
+//            data.filter(function(d){ return d.Country_code == "EAS";}),
+//            data.filter(function(d){ return d.Country_code == "ECS";}),
+//            data.filter(function(d){ return d.Country_code == "LCN";}),
+//            data.filter(function(d){ return d.Country_code == "NAC";}),             
+//            data.filter(function(d){ return d.Country_code == "SAS";}),
+//            data.filter(function(d){ return d.Country_code == "SSF";})])             
     .enter().append("path")
     .attr("transform", `translate(${margin.left},0)`)
     .attr("fill", "none")
