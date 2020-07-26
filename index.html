@@ -199,9 +199,12 @@ async function init() {
 
   // Add path
   const path = grp
-    .append("path")
-    .attr("transform", `translate(${margin.left},0)`)
+    .selectAll(".line")
+//     .append("path")
+//     .attr("transform", `translate(${margin.left},0)`)
     .data([data.filter(function(d){ return d.Country_code == "LCN";}), data.filter(function(d){ return d.Country_code == "WLD";})])
+    .enter().append("path")
+    .attr("transform", `translate(${margin.left},0)`)
 //     .datum(data.filter(function(d){ return d.Country_code == "LCN";}))
     .attr("fill", "none")
     .attr("stroke", "steelblue")
