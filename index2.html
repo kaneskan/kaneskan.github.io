@@ -232,6 +232,7 @@ async function init() {
     .delay(function(d,i) { return i*500;});
   
   path
+    .append(path)
     .attr("stroke-dashoffset", pathLength)
     .attr("stroke-dasharray", pathLength)
     .transition(transitionPath)
