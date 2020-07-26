@@ -158,18 +158,16 @@ body {
   <h2>Footer</h2>
 </div> -->
 
-  
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
 
 <script>    
 // Load data
 async function init() { 
-  const data = await d3
-    .csv('https://kaneskan.github.io/Urbanization.csv');
+  const data = await d3.csv('https://kaneskan.github.io/Urbanization.csv');
 
   // Create SVG and padding for the chart
 
-  const svg = d3
-    .select("#chart")
+  const svg = d3.select("#chart")
     .append("svg")
     .attr("height", 300)
     .attr("width", 600);
@@ -182,18 +180,15 @@ async function init() {
     .attr("transform", `translate(-${margin.left},-${margin.top})`);
 
   // Create scales
-  const yScale = d3
-    .scaleLinear()
+  const yScale = d3.scaleLinear()
     .range([height, 0])
     .domain([0, 105]);
 //     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
-  const xScale = d3
-    .scaleLinear()
+  const xScale = d3.scaleLinear()
     .range([0, width])
     .domain(d3.extent(data, dataPoint => dataPoint.Year));
 
-  const line = d3
-    .line()
+  const line = d3.line()
     .x(dataPoint => xScale(dataPoint.Year))
     .y(dataPoint => yScale(dataPoint.Urban_per));
 
@@ -212,7 +207,6 @@ async function init() {
            data.filter(function(d){ return d.Country_code == "SAS";}),
            data.filter(function(d){ return d.Country_code == "SSF";})])             
     .enter().append("path")
-    .selectAll("path")
     .attr("transform", `translate(${margin.left},0)`)
     .attr("fill", "none")
     .attr("stroke", function(d,i) { return color(i);})
@@ -224,9 +218,8 @@ async function init() {
   const pathLength = path.node().getTotalLength();
   // D3 provides lots of transition options, have a play around here:
   // https://github.com/d3/d3-transition
-  const transitionPath = d3
-    .transition()
-    .delay(function(d,i) { return i*500;})
+  const transitionPath = d3.transition()
+    .delay(function(i) { return i*500;})
     .duration(2500)
     .ease(d3.easeSin);
   
