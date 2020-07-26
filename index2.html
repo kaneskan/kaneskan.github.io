@@ -214,8 +214,8 @@ async function init() {
 //     .attr("stroke-linecap", "round")
     .attr("stroke-width", 1.5)
     .attr("d", line);
-
-  const pathLength = path.node().getTotalLength();
+  const pathLength = 600;
+//   const pathLength = path.node().getTotalLength();
   // D3 provides lots of transition options, have a play around here:
   // https://github.com/d3/d3-transition
   const transitionPath = d3.transition()
@@ -225,7 +225,7 @@ async function init() {
 //     .ease(d3.easeSin);
   
   path
-//     .attr("stroke-dashoffset", pathLength)
+    .attr("stroke-dashoffset", pathLength)
     .attr("stroke-dasharray", pathLength)
     .transition(transitionPath)
     .attr("stroke-dashoffset", 0);
