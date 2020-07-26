@@ -214,7 +214,7 @@ async function init() {
   // Create scales
   const yScale = d3
     .scaleLinear()
-    .range([height-5, 0])
+    .range([height+5, 0])
     .domain([0, 100]);
 //     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
   const xScale = d3
@@ -257,7 +257,8 @@ async function init() {
   chart
     .append("g")
     .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(xScale).ticks(10));
+    .call(d3.axisBottom(xScale).ticks(10))
+    .tickFormat(d3.format("~s"));  
   // Add the Y Axis
   chart
     .append("g")
