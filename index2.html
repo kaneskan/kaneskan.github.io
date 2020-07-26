@@ -219,7 +219,7 @@ async function init() {
   // D3 provides lots of transition options, have a play around here:
   // https://github.com/d3/d3-transition
   const transitionPath = d3.transition()
-    .delay(function(i) { return i*50;})
+    .delay(function(d, i) { return d*50;})
     .duration(2500)
     .ease(d3.easeSin);
   
