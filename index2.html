@@ -185,7 +185,7 @@ async function init() {
     .domain([0, 105]);
 //     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
   const xScale = d3.scaleLinear()
-    .range([0, width])
+    .range([0, width-5])
     .domain(d3.extent(data, dataPoint => dataPoint.Year));
 
   const line = d3.line()
