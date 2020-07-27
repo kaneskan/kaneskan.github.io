@@ -292,7 +292,7 @@ async function init() {
     .text("test");
 
   d3.selectAll("path")
-    .on("mouseover", function(d) {d3.select(this) tooltip.text(d); return tooltip.style("visibility", "visible");})
+    .on("mouseover", function(d) {tooltip.text(d.Urban_per); return tooltip.style("visibility", "visible");})
     .on("mousemove", function(){return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
 
