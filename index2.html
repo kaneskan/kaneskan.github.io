@@ -223,21 +223,13 @@ async function init() {
     .selectAll("path")
     .delay(function(d, i) { if(i==0){return 0} else {return 10000+i*500};})
     .duration(2000);
-//     .ease(d3.easeSin);
+    .ease(d3.easeSin);
   
   path
     .attr("stroke-dashoffset", pathLength)
     .attr("stroke-dasharray", pathLength)
     .transition(transitionPath)
-    .attr("stroke-dashoffset", 0)
-    .on('mouseover', function (d, i) {
-        d3.select(this).transition()
-             .duration('50')
-             .attr('opacity', '.85');})
-    .on('mouseout', function (d, i) {
-        d3.select(this).transition()
-             .duration('50')
-             .attr('opacity', '1');});
+    .attr("stroke-dashoffset", 0);
 
   // Add the X Axis
   chart
@@ -269,6 +261,16 @@ async function init() {
     .style("fill", color(0))
     .style("font-size", "12px")
     .style("font-weight", "bold");
+  
+  path
+    .on('mouseover', function (d, i) {
+      d3.select(this).transition()
+           .duration('50')
+           .attr('opacity', '.85');})
+    .on('mouseout', function (d, i) {
+      d3.select(this).transition()
+           .duration('50')
+           .attr('opacity', '1');});
   
   
   }
