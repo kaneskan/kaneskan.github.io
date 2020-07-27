@@ -213,7 +213,7 @@ async function init() {
     .attr("stroke", function(d,i) { return color(i);})
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
-    .attr("stroke-width", 1.5)
+    .attr("stroke-width", 3.0)
     .attr("d", line);
   
 
@@ -282,7 +282,7 @@ async function init() {
 
   d3.selectAll("path")
     .on("mouseover", function(){return tooltip.style("visibility", "visible");})
-    .on("mousemove", function(){return tooltip.style("top", event.pageY-150+"px").style("left", event.pageX-300+"px");})
+    .on("mousemove", function(){return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
 
   
