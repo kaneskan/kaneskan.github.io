@@ -292,7 +292,7 @@ async function init() {
     .text("test");
 
   d3.selectAll("path")
-    .on("mouseover", function(){return tooltip.style("stoke", "black").style("opacity", 0).style("visibility", "visible");})
+    .on("mouseover", function(d) {tooltip.style("opacity", 1) d3.select(this).style("stoke", "black").style("opacity", 1);})
     .on("mousemove", function(){return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
 
