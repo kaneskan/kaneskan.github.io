@@ -283,7 +283,7 @@ async function init() {
     .style("visibility", "hidden")
 
 
-  d3.selectAll(".lines")
+  d3.selectAll(".line")
     .on("mouseover", function(d) {return tooltip.style("visibility", "visible");})
     .on("mousemove", function(d){return tooltip.html("The exact value of<br>this cell is: " + d.Year).style("top", event.pageY+"px").style("left", event.pageX+"px");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
