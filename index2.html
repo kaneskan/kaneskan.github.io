@@ -209,15 +209,7 @@ async function init() {
   // Add path
   const path = chart.append("g")
     .selectAll(".line")
-    .data(data_u)
-//     .data([data.filter(function(d){ return d.Country_code == "WLD";}), 
-//            data.filter(function(d){ return d.Country_code == "CEB";}),
-//            data.filter(function(d){ return d.Country_code == "EAS";}),
-//            data.filter(function(d){ return d.Country_code == "ECS";}),
-//            data.filter(function(d){ return d.Country_code == "LCN";}),
-//            data.filter(function(d){ return d.Country_code == "NAC";}),             
-//            data.filter(function(d){ return d.Country_code == "SAS";}),
-//            data.filter(function(d){ return d.Country_code == "SSF";})])             
+    .data(data_u)           
     .enter().append("path")
 //     .attr("transform", `translate(${margin.left},0)`)
     .attr("fill", "none")
@@ -292,7 +284,7 @@ async function init() {
     .text("test");
 
   d3.selectAll("path")
-    .on("mouseover", function(d) {tooltip.text(d.Urban_per); return tooltip.style("visibility", "visible");})
+    .on("mouseover", function(d) {tooltip.text(d.y); return tooltip.style("visibility", "visible");})
     .on("mousemove", function(){return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
 
