@@ -252,8 +252,8 @@ async function init() {
 
   chart
     .append("text")
-    .attr("x", x(300))
-    .attr("y", y(150))
+    .attr("x", xScale(1990))
+    .attr("y", yScale(50))
     .text("threshold: 140")
     .style("font-size", "15px");
   
