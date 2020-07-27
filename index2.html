@@ -281,7 +281,7 @@ async function init() {
     .append("div")
     .style("position", "absolute")
     .style("visibility", "hidden")
-    .text("test");
+    .text(function(d) { return d; });
 
   d3.selectAll("path")
     .on("mouseover", function(d) {return tooltip.style("visibility", "visible").text(d.Urban_per);})
