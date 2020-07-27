@@ -281,10 +281,10 @@ async function init() {
     .append("div")
     .style("position", "absolute")
     .style("visibility", "hidden")
-    .text(function(d) { return d.Urban_per; });
+
 
   d3.selectAll("path")
-    .on("mouseover", function(d) {return tooltip.style("visibility", "visible").text(d);})
+    .on("mouseover", function(d) {return tooltip.style("visibility", "visible").text(d.Urban_per);})
     .on("mousemove", function(){return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
 
