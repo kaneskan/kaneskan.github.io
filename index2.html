@@ -278,7 +278,7 @@ async function init() {
     .append("div")
     .style("position", "absolute")
     .style("visibility", "hidden")
-    .text("I'm a circle!");
+    .text(function(d) { return d.Urban_per;});
 
   d3.selectAll("path")
     .on("mouseover", function(){return tooltip.style("visibility", "visible");})
