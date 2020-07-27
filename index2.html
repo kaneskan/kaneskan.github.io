@@ -229,7 +229,15 @@ async function init() {
     .attr("stroke-dashoffset", pathLength)
     .attr("stroke-dasharray", pathLength)
     .transition(transitionPath)
-    .attr("stroke-dashoffset", 0);
+    .attr("stroke-dashoffset", 0)
+    .on('mouseover', function (d, i) {
+      d3.select(this).transition()
+           .duration('50')
+           .attr('opacity', '.85');})
+    .on('mouseout', function (d, i) {
+      d3.select(this).transition()
+           .duration('50')
+           .attr('opacity', '1');});
 
   // Add the X Axis
   chart
@@ -262,16 +270,7 @@ async function init() {
     .style("font-size", "12px")
     .style("font-weight", "bold");
   
-  path
-    .on('mouseover', function (d, i) {
-      d3.select(this).transition()
-           .duration('50')
-           .attr('opacity', '.85');})
-    .on('mouseout', function (d, i) {
-      d3.select(this).transition()
-           .duration('50')
-           .attr('opacity', '1');});
-  
+
   
   }
 </script>  
