@@ -252,13 +252,15 @@ async function init() {
 
   chart
     .append("text")
+    .transition()
+    .delay(10000)
     .attr("x", xScale(1990))
     .attr("y", yScale(50))
     .text("World")
     .style("fill", "steelblue")
     .style("font-size", "12px")
-    .transition()
-    .delay(2000);
+    .style("font-weight", "bold");
+
   
   
   }
