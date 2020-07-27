@@ -284,7 +284,7 @@ async function init() {
 
 
   path
-    .on("mouseover", function(d) {return tooltip.style("visibility", "visible").text(xScale(d));})
+    .on("mouseover", function(d,i) {return tooltip.style("visibility", "visible").text(d(i).Urban_per);})
     .on("mousemove", function() {return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
     .on("mouseout", function() {return tooltip.style("visibility", "hidden");});  
 
