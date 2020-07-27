@@ -282,7 +282,7 @@ async function init() {
 
   d3.selectAll("path")
     .on("mouseover", function(){return tooltip.style("visibility", "visible");})
-    .on("mousemove", function(){return tooltip.style("top", "px").style("left","px");})
+    .on("mousemove", function(){return tooltip.style("top", event.pageY-150+"px").style("left", event.pageX-300+"px");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
 
   
