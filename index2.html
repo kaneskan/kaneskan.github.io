@@ -236,18 +236,27 @@ async function init() {
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(xScale)
       .ticks(10)
-      .tickFormat(d3.format("d")));  
+      .tickFormat(d3.format("d"))); 
+  
   // Add the Y Axis
   chart
     .append("g")
     .attr("transform", `translate(0, 0)`)
     .call(d3.axisLeft(yScale));
-  
-  chart
-    .transition()
-    .delay(20000)
-    .remove();
 
+  // Remove chart
+//   chart
+//     .transition()
+//     .delay(20000)
+//     .remove();
+
+  chart
+    .append("text")
+    .attr("x", x(300))
+    .attr("y", y(150))
+    .text("threshold: 140")
+    .style("font-size", "15px")
+  
   
   }
 </script>  
