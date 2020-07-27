@@ -230,6 +230,7 @@ async function init() {
     .attr("stroke-dasharray", pathLength)
     .transition(transitionPath)
     .attr("stroke-dashoffset", 0)
+    .selectAll(".path")
     .on('mouseover', function (d, i) {
       d3.select(this).transition()
            .duration('50')
