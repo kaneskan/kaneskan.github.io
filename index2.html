@@ -289,10 +289,10 @@ async function init() {
     .append("div")
     .style("position", "absolute")
     .style("visibility", "hidden")
-    .text(function(d) { return d;});
+    .text("test");
 
   d3.selectAll("path")
-    .on("mouseover", function(){return tooltip.style("visibility", "visible");})
+    .on("mouseover", function(){return tooltip.style("stoke", "black").style("opacity", 0).style("visibility", "visible");})
     .on("mousemove", function(){return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
 
