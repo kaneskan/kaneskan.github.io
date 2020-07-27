@@ -196,17 +196,28 @@ async function init() {
   // Create colors
   const color = d3.scaleOrdinal(d3.schemeCategory10);  
   
-  // Add path
-  const path = chart.append("g")
-    .selectAll(".line")
-    .data([data.filter(function(d){ return d.Country_code == "WLD";}), 
+  // Create data
+  const data = [data.filter(function(d){ return d.Country_code == "WLD";}), 
            data.filter(function(d){ return d.Country_code == "CEB";}),
            data.filter(function(d){ return d.Country_code == "EAS";}),
            data.filter(function(d){ return d.Country_code == "ECS";}),
            data.filter(function(d){ return d.Country_code == "LCN";}),
            data.filter(function(d){ return d.Country_code == "NAC";}),             
            data.filter(function(d){ return d.Country_code == "SAS";}),
-           data.filter(function(d){ return d.Country_code == "SSF";})])             
+           data.filter(function(d){ return d.Country_code == "SSF";})];    
+  
+  // Add path
+  const path = chart.append("g")
+    .selectAll(".line")
+    .data(data)
+//     .data([data.filter(function(d){ return d.Country_code == "WLD";}), 
+//            data.filter(function(d){ return d.Country_code == "CEB";}),
+//            data.filter(function(d){ return d.Country_code == "EAS";}),
+//            data.filter(function(d){ return d.Country_code == "ECS";}),
+//            data.filter(function(d){ return d.Country_code == "LCN";}),
+//            data.filter(function(d){ return d.Country_code == "NAC";}),             
+//            data.filter(function(d){ return d.Country_code == "SAS";}),
+//            data.filter(function(d){ return d.Country_code == "SSF";})])             
     .enter().append("path")
 //     .attr("transform", `translate(${margin.left},0)`)
     .attr("fill", "none")
@@ -278,7 +289,7 @@ async function init() {
     .append("div")
     .style("position", "absolute")
     .style("visibility", "hidden")
-    .text(function(d) { return d.Urban_per;});
+    .text(function(d) { return d;});
 
   d3.selectAll("path")
     .on("mouseover", function(){return tooltip.style("visibility", "visible");})
