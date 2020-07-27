@@ -254,8 +254,11 @@ async function init() {
     .append("text")
     .attr("x", xScale(1990))
     .attr("y", yScale(50))
-    .text("threshold: 140")
-    .style("font-size", "15px");
+    .text("World")
+    .style("fill", "steelblue")
+    .style("font-size", "12px")
+    .transition()
+    .delay(2000);
   
   
   }
