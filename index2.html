@@ -283,10 +283,10 @@ async function init() {
     .style("visibility", "hidden")
 
 
-  d3.selectAll(".line")
-    .on("mouseover", function(d) {return tooltip.style("visibility", "visible");})
-    .on("mousemove", function(d){return tooltip.html("The exact value of<br>this cell is: " + d.Year).style("top", event.pageY+"px").style("left", event.pageX+"px");})
-    .on("mouseout", function(){return tooltip.style("visibility", "hidden");});  
+  d3.selectAll("path")
+    .on("mouseover", function(d) {return tooltip.style("visibility", "visible").text(d.Urban_per);})
+    .on("mousemove", function(d) {return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
+    .on("mouseout", function() {return tooltip.style("visibility", "hidden");});  
 
   
   }
