@@ -228,7 +228,7 @@ data_u.forEach(function(d) {
 //   });
 });
 
-var allGroup = ["Population", "Urban_pop", "Rural_pop"]
+var allGroup = ["Population", "Urban_pop", "Rural_pop"];
 
 // Reformat the data: we need an array of arrays of {x, y} tuples
 var dataReady = allGroup.map( function(grpName) { // .map allows to do something for each element of the list
@@ -245,8 +245,7 @@ var dataReady = allGroup.map( function(grpName) { // .map allows to do something
   
   // Add path
   const path = chart.append("g")
-//     .selectAll(".line")
-      .select("line")
+    .selectAll(".line")
     .data(dataReady)           
     .enter().append("path")
 //     .attr("transform", `translate(${margin.left},0)`
