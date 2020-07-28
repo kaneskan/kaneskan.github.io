@@ -197,10 +197,10 @@ async function init() {
 
   // Create scales
   const yScale = d3.scaleLinear()
-    .range([height-margin.top, 0])
+    .range([height, 0])
 //     .domain([0, 7000000000]);
-//     .domain([0, d3.max(data, d => d.Population)]);
-      .domain([0, d3.max(data, function(d) {return d.Population})]);
+    .domain([0, d3.max(data, d => d.Population)]);
+
 
   const xScale = d3.scaleTime()
     .range([0, width])
@@ -229,9 +229,9 @@ var parseDate = d3.timeParse("%Y");
 data_u.forEach(function(d) { 
 //   d.values.forEach(function(d) {
     d.Year = parseDate(d.Year);
-    d.Population = +d.Population;
-    d.Urban_pop = +d.Urban_pop;   
-    d.Rural_pop = +d.Rural_pop;    
+    d.Population = parseInt(d.Population);
+    d.Urban_pop = parseInt(d.Urban_pop);   
+    d.Rural_pop = parseInt(d.Rural_pop);    
 //   });
 });
     
