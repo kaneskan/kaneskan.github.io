@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<head>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+/*   padding: 10px; */
+  background: #f1f1f1;
+/*   margin: 0; */
+/*   margin-left: 200px;
+  margin-right: 200px; */
+}  
+  
+/* Header/Blog Title */
+.header {
+  padding: 5px;
+  text-align: center;
+  background: white;
+}
+
+.header h1 {
+  font-size: 30px;
+}
+
+p {
+  font-size: 20px;
+}
+  
+  
+  
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  width: 100%;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  background-color: red;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.row {
+  display: table;
+  width: 100%;
+}    
+  
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  display: table-cell;
+  float: left;
+  width: 100%;
+/*   width: 75%; */
+}
+
+#chart {
+  text-align: center;
+  margin-top: 40px;
+}  
+  
+/* Right column */
+/* .rightcolumn {
+  display: table-cell;
+  float: left;
+  width: 40%;
+/*   padding-left: 20px; */
+} */
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 10px;
+} 
+  
+  
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.text1 {
+  padding: 10px;
+  text-align: center;
+  background: lightblue;
+  margin-top: 10px;
+}
+  
+ 
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1000px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+  
+  
+<!-- <body> -->
+<body onload='init()'>
+<div class="header">
+  <h1>Urbanization</h1>
+  <p>How much urbanization has been growing?</p>   
+</div>
+<div class="topnav">
+  <a href="https://kaneskan.github.io/urbanization.html" style="float:left">Back</a>
+  <a href="https://kaneskan.github.io/urbanization3.html" style="float:right">Next</a>  
+</div>      
+
+<div class="text1">
+  <p>fnsiuefhsifhsdihciosdiofjdjfifsd</p>
+</div>
+  
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <p>The percent of global urbanization from 1960 to 2019</p> 
+      <div id="chart"></div>  
+        <div class="fakeimg" style="height:20px;">Source</div>
+    </div>  
+  </div>
+<!--   <div class="rightcolumn">
+    <div class="card">
+      <div class="text1">
+        <p>fnsiuefhsifhsdihciosdiofjdjfifsd</p>
+      </div>
+      <div class="text1">
+        <p>asdfasdrgffgeafefaerfdsfsdafasdf</p>
+      </div>
+    </div>  
+  </div> -->
+</div>
+
+<!-- <div class="footer">
+  <h2>Footer</h2>
+</div> -->
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+<script>    
+// Load data
+async function init() { 
+  const data = await d3.csv('https://kaneskan.github.io/Urbanization.csv');
+
+  // Create SVG and padding for the chart
+
+  const svg = d3.select("#chart")
+    .append("svg")
+    .attr("height", 400)
+    .attr("width", 800);
+  const margin = { top: 20, bottom: 20, left: 30, right: 50 };
+  const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
+  const width = +svg.attr("width") - margin.left - margin.right;
+  const height = +svg.attr("height") - margin.top - margin.bottom;
+//   const grp = chart
+//     .append("g");
+//     .attr("transform", `translate(-${margin.left},-${margin.top})`);
+
+  // Create scales
+  const yScale = d3.scaleLinear()
+    .range([height, 0])
+    .domain([0, 85]);
+//     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
+  const xScale = d3.scaleTime()
+    .range([0, width])
+    .domain(d3.extent(data, dataPoint => dataPoint.Year));
+
+  const line = d3.line()
+    .x(dataPoint => xScale(dataPoint.Year))
+    .y(dataPoint => yScale(dataPoint.Urban_per));
+
+  // Create colors
+  const color = d3.scaleOrdinal(d3.schemeCategory10);  
+  
+  // Create data
+  const data_u = [data.filter(function(d){ return d.Country_code == "WLD";}), 
+                  data.filter(function(d){ return d.Country_code == "CEB";}),
+                  data.filter(function(d){ return d.Country_code == "EAS";}),
+                  data.filter(function(d){ return d.Country_code == "ECS";}),
+                  data.filter(function(d){ return d.Country_code == "LCN";}),
+                  data.filter(function(d){ return d.Country_code == "NAC";}),             
+                  data.filter(function(d){ return d.Country_code == "SAS";}),
+                  data.filter(function(d){ return d.Country_code == "SSF";})];    
+  
+  // Add path
+  const path = chart.append("g")
+    .selectAll(".line")
+    .data(data_u)           
+    .enter().append("path")
+//     .attr("transform", `translate(${margin.left},0)`)
+    .attr("fill", "none")
+    .attr("stroke", function(d,i) { return color(i);})
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 2.0)
+    .attr("d", line);
+  
+
+  const pathLength = path.node().getTotalLength()+20;
+  // D3 provides lots of transition options, have a play around here:
+  // https://github.com/d3/d3-transition
+  const transitionPath = d3.transition()
+    .selectAll("path")
+    .delay(function(d, i) { if(i==0){return 0} else {return 2000+i*500};})
+    .duration(2000)
+    .ease(d3.easeSin);
+  
+  path
+    .attr("stroke-dashoffset", pathLength)
+    .attr("stroke-dasharray", pathLength)
+    .transition(transitionPath)
+    .attr("stroke-dashoffset", 0);
+
+
+  // Add the X Axis
+  chart
+    .append("g")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(xScale)
+      .ticks(10)
+      .tickFormat(d3.format("d"))); 
+  
+  // Add the Y Axis
+  chart
+    .append("g")
+    .attr("transform", `translate(0, 0)`)
+    .call(d3.axisLeft(yScale));
+
+  // Remove chart
+//   chart
+//     .transition()
+//     .delay(20000)
+//     .remove();
+
+// Region annotation
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(45))
+    .transition()
+    .delay(2000)
+    .style("fill", color(0))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("World");
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(59))
+    .transition()
+    .delay(5000)
+    .style("fill", color(1))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("Central Europe and the Baltics");  
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(37))
+    .transition()
+    .delay(5000)
+    .style("fill", color(2))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("East Asia & Pacific");  
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(65))
+    .transition()
+    .delay(5000)
+    .style("fill", color(3))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("Europe & Central Asia");  
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(70))
+    .transition()
+    .delay(5000)
+    .style("fill", color(4))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("Latin America & Caribbean");  
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(79))
+    .transition()
+    .delay(5000)
+    .style("fill", color(5))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("North America");    
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(22))
+    .transition()
+    .delay(5000)
+    .style("fill", color(6))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("South Asia");
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(30))
+    .transition()
+    .delay(5000)
+    .style("fill", color(7))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("Sub-Saharan Africa"); 
+  
+    // Append a vertical line to highlight the separation
+  chart
+    .append("line")
+      .attr("x1", xScale(1960))
+      .attr("x2", xScale(2019))
+      .attr("y1", yScale(68))
+      .attr("y2", yScale(68))
+      .transition()
+      .delay(7000)
+      .attr("stroke", "grey")
+      .attr("stroke-dasharray", "4");
+            
+  chart
+    .append("text")
+    .attr("x", xScale(2004))
+    .attr("y", yScale(65))
+    .style("font-size", "12px")
+    .style("fill", color(7))
+    .style("font-weight", "bold")
+    .transition()
+    .delay(7000)
+    .text("2050 World Urbanization Forecasted");
+  
+//   var mouseG = svg.append("g")
+//     .attr("class", "mouse-over-effects");
+
+//   mouseG.append("path") // this is the black vertical line to follow mouse
+//     .attr("class", "mouse-line")
+//     .style("stroke", "black")
+//     .style("stroke-width", "1px")
+//     .style("opacity", "0");
+
+  // create a tooltip
+  var tooltip = d3.select(".svg")
+    .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+
+  path
+    .on("mouseover", function(d,i) {return tooltip.style("visibility", "visible").text(yScale(d));})
+    .on("mousemove", function() {return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
+    .on("mouseout", function() {return tooltip.style("visibility", "hidden");});  
+
+  
+  }
+</script>  
+</body>
+</html>
