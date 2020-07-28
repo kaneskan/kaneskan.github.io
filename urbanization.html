@@ -207,8 +207,8 @@ async function init() {
     .domain(d3.extent(data, d => d.Year));
 
   const line = d3.line()
-    .x(d => xScale(d.time))
-    .y(d => yScale(d.values));
+    .x(d => xScale(+d.time))
+    .y(d => yScale(+d.values));
 
 
   // Create colors
@@ -254,7 +254,7 @@ var dataReady = allGroup.map( function(grpName) { // .map allows to do something
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", d=>line(d));
+    .attr("d", d=>line(d.values));
 
   
 //   const pathLength = path.node().getTotalLength()+20;
