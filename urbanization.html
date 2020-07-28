@@ -286,7 +286,7 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(23))
+    .attr("y", yScale(62))
     .transition()
     .delay(5000)
     .style("fill", color(1))
@@ -297,7 +297,7 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(56))
+    .attr("y", yScale(35))
     .transition()
     .delay(5000)
     .style("fill", color(2))
@@ -308,7 +308,7 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(45))
+    .attr("y", yScale(68))
     .transition()
     .delay(5000)
     .style("fill", color(3))
@@ -319,7 +319,7 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(47))
+    .attr("y", yScale(71))
     .transition()
     .delay(5000)
     .style("fill", color(4))
@@ -330,7 +330,7 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(70))
+    .attr("y", yScale(76))
     .transition()
     .delay(5000)
     .style("fill", color(5))
@@ -341,7 +341,7 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(18))
+    .attr("y", yScale(24))
     .transition()
     .delay(5000)
     .style("fill", color(6))
@@ -352,7 +352,7 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(13))
+    .attr("y", yScale(28))
     .transition()
     .delay(5000)
     .style("fill", color(7))
@@ -360,6 +360,23 @@ async function init() {
     .style("font-weight", "bold")
     .text("Sub-Saharan Africa"); 
   
+    // Append a vertical line to highlight the separation
+  chart
+    .append("line")
+      .attr("x1", x(0))
+      .attr("x2", x(2019))
+      .attr("y1", y(68))
+      .attr("y2", y(68))
+      .attr("stroke", "red")
+      .attr("stroke-dasharray", "4");
+            
+  chart
+    .append("text")
+    .attr("x", x(190))
+    .attr("y", y(2012))
+    .text("threshold: 140")
+    .style("font-size", "15px")
+    .text("2050 World Urbanization Forecasted");
   
 //   var mouseG = svg.append("g")
 //     .attr("class", "mouse-over-effects");
