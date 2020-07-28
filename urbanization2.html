@@ -274,18 +274,18 @@ lines.selectAll('.line-group')
   .data(data_u).enter()
   .append('g')
   .attr('class', 'line-group')  
-  .on("mouseover", function(d, i) {
-      svg.append("text")
-        .attr("class", "title-text")
-        .style("fill", color(i))        
-        .text(d.name)
-        .attr("text-anchor", "middle")
-        .attr("x", (width-margin)/2)
-        .attr("y", 5);
-    })
-  .on("mouseout", function(d) {
-      svg.select(".title-text").remove();
-    })
+//   .on("mouseover", function(d, i) {
+//       svg.append("text")
+//         .attr("class", "title-text")
+//         .style("fill", color(i))        
+//         .text(d.name)
+//         .attr("text-anchor", "middle")
+//         .attr("x", (width-margin)/2)
+//         .attr("y", 5);
+//     })
+//   .on("mouseout", function(d) {
+//       svg.select(".title-text").remove();
+//     })
   .append('path')
   .attr('class', 'line')  
   .attr('d', d => line(d.values))
