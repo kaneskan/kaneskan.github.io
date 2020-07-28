@@ -187,7 +187,7 @@ async function init() {
     .append("svg")
     .attr("height", 400)
     .attr("width", 800);
-  const margin = { top: 0, bottom: 20, left: 30, right: 100 };
+  const margin = { top: 0, bottom: 20, left: 30, right: 50 };
   const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
   const width = +svg.attr("width") - margin.left - margin.right;
   const height = +svg.attr("height") - margin.top - margin.bottom;
@@ -367,15 +367,19 @@ async function init() {
       .attr("x2", xScale(2019))
       .attr("y1", yScale(68))
       .attr("y2", yScale(68))
-      .attr("stroke", "red")
+      .transition()
+      .delay(7000)
+      .attr("stroke", "grey")
       .attr("stroke-dasharray", "4");
             
   chart
     .append("text")
-    .attr("x", xScale(2013))
-    .attr("y", yScale(68))
+    .attr("x", xScale(2008))
+    .attr("y", yScale(65))
     .text("threshold: 140")
-    .style("font-size", "15px")
+    .style("font-size", "12px")
+    .style("fill", color(7))
+    .style("font-weight", "bold")
     .text("2050 World Urbanization Forecasted");
   
 //   var mouseG = svg.append("g")
