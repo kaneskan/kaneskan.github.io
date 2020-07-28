@@ -248,7 +248,11 @@ data_u.forEach(function(d) {
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
     .attr("d", line1)
-    .attr("d", line2)  
+  
+  path
+    .attr("d", line2);
+  
+  path
     .attr("d", line3);
   
 //   const pathLength = path.node().getTotalLength()+20;
