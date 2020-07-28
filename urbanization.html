@@ -220,7 +220,7 @@ async function init() {
   const color = d3.scaleOrdinal(d3.schemeCategory10);  
   
   // Create data
-  const data_u = [data.filter(function(d){ return d.Country_code == "WLD";})]; 
+  const data_u = data.filter(function(d){ return d.Country_code == "WLD";}); 
  
   
   // Add path
