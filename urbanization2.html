@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<head>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+/*   padding: 10px; */
+  background: #f1f1f1;
+/*   margin: 0; */
+/*   margin-left: 200px;
+  margin-right: 200px; */
+}  
+  
+/* Header/Blog Title */
+.header {
+  padding: 5px;
+  text-align: center;
+  background: white;
+}
+
+.header h1 {
+  font-size: 30px;
+}
+
+p {
+  font-size: 20px;
+}
+  
+  
+  
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  width: 100%;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  background-color: red;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.row {
+  display: table;
+  width: 100%;
+}    
+  
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  display: table-cell;
+  float: left;
+  width: 100%;
+/*   width: 75%; */
+}
+
+#chart {
+  text-align: center;
+  margin-top: 40px;
+}  
+  
+/* Right column */
+/* .rightcolumn {
+  display: table-cell;
+  float: left;
+  width: 40%;
+/*   padding-left: 20px; */
+} */
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 10px;
+} 
+  
+  
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.text1 {
+  padding: 10px;
+  text-align: center;
+  background: lightblue;
+  margin-top: 10px;
+}
+  
+ 
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1000px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+  
+  
+<!-- <body> -->
+<body onload='init()'>
+<div class="header">
+  <h1>Urbanization</h1>
+  <p>How much urbanization has been growing?</p>   
+</div>
+<div class="topnav">
+  <a href="https://kaneskan.github.io/urbanization2.html" style="float:right">Next</a>
+</div>      
+
+<div class="text1">
+  <p>fnsiuefhsifhsdihciosdiofjdjfifsd</p>
+</div>
+  
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <p>The percent of global urbanization from 1960 to 2019</p> 
+      <div id="chart"></div>  
+        <div class="fakeimg" style="height:20px;">Source</div>
+    </div>  
+  </div>
+<!--   <div class="rightcolumn">
+    <div class="card">
+      <div class="text1">
+        <p>fnsiuefhsifhsdihciosdiofjdjfifsd</p>
+      </div>
+      <div class="text1">
+        <p>asdfasdrgffgeafefaerfdsfsdafasdf</p>
+      </div>
+    </div>  
+  </div> -->
+</div>
+
+<!-- <div class="footer">
+  <h2>Footer</h2>
+</div> -->
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   -->
+
+<script>    
+// Load data
+async function init() { 
+  const data = await d3.csv('https://kaneskan.github.io/Urbanization.csv');
+
+  // Create SVG and padding for the chart
+
+  const svg = d3.select("#chart")
+    .append("svg")
+    .attr("height", 400)
+    .attr("width", 800);
+  const margin = { top: 0, bottom: 20, left: 30, right: 20 };
+  const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
+  const width = +svg.attr("width") - margin.left - margin.right;
+  const height = +svg.attr("height") - margin.top - margin.bottom;
+//   const grp = chart
+//     .append("g");
+//     .attr("transform", `translate(-${margin.left},-${margin.top})`);
+
+var lineOpacity = "0.25";
+var lineOpacityHover = "0.85";
+var otherLinesOpacityHover = "0.1";
+var lineStroke = "1.5px";
+var lineStrokeHover = "2.5px";
+
+var circleOpacity = '0.85';
+var circleOpacityOnLineHover = "0.25"
+var circleRadius = 3;
+var circleRadiusHover = 6;
+
+  // Create scales
+  const yScale = d3.scaleLinear()
+    .range([height, 0])
+    .domain([10, 90]);
+//     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
+  const xScale = d3.scaleTime()
+    .range([0, width])
+    .domain(d3.extent(data, dataPoint => dataPoint.Year));
+
+  const line = d3.line()
+    .x(dataPoint => xScale(dataPoint.Year))
+    .y(dataPoint => yScale(dataPoint.Urban_per));
+
+  // Create colors
+  const color = d3.scaleOrdinal(d3.schemeCategory10);  
+  
+  // Create data
+  const data_u = [data.filter(function(d){ return d.Country_code == "WLD";}), 
+                  data.filter(function(d){ return d.Country_code == "CEB";}),
+                  data.filter(function(d){ return d.Country_code == "EAS";}),
+                  data.filter(function(d){ return d.Country_code == "ECS";}),
+                  data.filter(function(d){ return d.Country_code == "LCN";}),
+                  data.filter(function(d){ return d.Country_code == "NAC";}),             
+                  data.filter(function(d){ return d.Country_code == "SAS";}),
+                  data.filter(function(d){ return d.Country_code == "SSF";})];    
+  
+  /* Add line into SVG */
+var line = d3.line()
+  .x(d => xScale(d.Year))
+  .y(d => yScale(d.Urban_per));
+
+let lines = svg.append('g')
+  .attr('class', 'lines');
+
+lines.selectAll('.line-group')
+  .data(data_u).enter()
+  .append('g')
+  .attr('class', 'line-group')  
+  .on("mouseover", function(d, i) {
+      svg.append("text")
+        .attr("class", "title-text")
+        .style("fill", color(i))        
+        .text(d.name)
+        .attr("text-anchor", "middle")
+        .attr("x", (width-margin)/2)
+        .attr("y", 5);
+    })
+  .on("mouseout", function(d) {
+      svg.select(".title-text").remove();
+    })
+  .append('path')
+  .attr('class', 'line')  
+  .attr('d', d => line(d.values))
+  .style('stroke', (d, i) => color(i))
+  .style('opacity', lineOpacity)
+  .on("mouseover", function(d) {
+      d3.selectAll('.line')
+					.style('opacity', otherLinesOpacityHover);
+      d3.selectAll('.circle')
+					.style('opacity', circleOpacityOnLineHover);
+      d3.select(this)
+        .style('opacity', lineOpacityHover)
+        .style("stroke-width", lineStrokeHover)
+        .style("cursor", "pointer");
+    })
+  .on("mouseout", function(d) {
+      d3.selectAll(".line")
+					.style('opacity', lineOpacity);
+      d3.selectAll('.circle')
+					.style('opacity', circleOpacity);
+      d3.select(this)
+        .style("stroke-width", lineStroke)
+        .style("cursor", "none");
+    });
+    
+    /* Add circles in the line */
+lines.selectAll("circle-group")
+  .data(data_u).enter()
+  .append("g")
+  .style("fill", (d, i) => color(i))
+  .selectAll("circle")
+  .data(d => d.values).enter()
+  .append("g")
+  .attr("class", "circle")  
+  .on("mouseover", function(d) {
+      d3.select(this)     
+        .style("cursor", "pointer")
+        .append("text")
+        .attr("class", "text")
+        .text(`${d.price}`)
+        .attr("x", d => xScale(d.date) + 5)
+        .attr("y", d => yScale(d.price) - 10);
+    })
+  .on("mouseout", function(d) {
+      d3.select(this)
+        .style("cursor", "none")  
+        .transition()
+        .duration(duration)
+        .selectAll(".text").remove();
+    })
+  .append("circle")
+  .attr("cx", d => xScale(d.Year))
+  .attr("cy", d => yScale(d.Urban_per))
+  .attr("r", circleRadius)
+  .style('opacity', circleOpacity)
+  .on("mouseover", function(d) {
+        d3.select(this)
+          .transition()
+          .duration(duration)
+          .attr("r", circleRadiusHover);
+      })
+    .on("mouseout", function(d) {
+        d3.select(this) 
+          .transition()
+          .duration(duration)
+          .attr("r", circleRadius);  
+      });
+
+
+/* Add Axis into SVG */
+var xAxis = d3.axisBottom(xScale).ticks(5);
+var yAxis = d3.axisLeft(yScale).ticks(5);
+
+svg.append("g")
+  .attr("class", "x axis")
+  .attr("transform", `translate(0, ${height-margin})`)
+  .call(xAxis);
+
+svg.append("g")
+  .attr("class", "y axis")
+  .call(yAxis)
+  .append('text')
+  .attr("y", 15)
+  .attr("transform", "rotate(-90)")
+  .attr("fill", "#000")
+  .text("Total values");
+    
+    
+    
+    
+    
+
+  
+  }
+</script>  
+</body>
+</html>
