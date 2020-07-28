@@ -207,16 +207,9 @@ async function init() {
     .domain(d3.extent(data, d => d.Year));
 
   const line1 = d3.line()
-    .x(dataPoint => xScale(dataPoint.Year))
-    .y(dataPoint => yScale(dataPoint.Population));
-  
-  const line2 = d3.line()
-    .x(dataPoint => xScale(dataPoint.Year))
-    .y(dataPoint => yScale(dataPoint.Urban_pop));
-  
-  const line3 = d3.line()
-    .x(dataPoint => xScale(dataPoint.Year))
-    .y(dataPoint => yScale(dataPoint.Rural_pop));
+    .x(dataPoint => xScale(dataPoint.time))
+    .y(dataPoint => yScale(dataPoint.values));
+
 
   // Create colors
   const color = d3.scaleOrdinal(d3.schemeCategory10);  
@@ -234,34 +227,36 @@ data_u.forEach(function(d) {
     d.Rural_pop = +d.Rural_pop;    
 //   });
 });
-    
+
+var allGroup = ["Population", "Urban_pop", "Rural_pop"]
+
+// Reformat the data: we need an array of arrays of {x, y} tuples
+var dataReady = allGroup.map( function(grpName) { // .map allows to do something for each element of the list
+  return {
+    name: grpName,
+    values: data.map(function(d) {
+      return {time: d.Year, value: +d[grpName]};
+    })
+  };
+});  
+  
+  
+  
   
   // Add path
   const path = chart.append("g")
 //     .selectAll(".line")
       .select("line")
-    .data(data_u)           
+    .data(dataReady)           
     .enter().append("path")
 //     .attr("transform", `translate(${margin.left},0)`
     .attr("fill", "none")
-    .attr("stroke", color(0))
+    .attr("stroke", function(d,i) {return color(i);})
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", line1);
-  
-     chart.append("g")
-//     .selectAll(".line")
-      .select("line")
-    .data(data_u)           
-    .enter().append("path")
-//     .attr("transform", `translate(${margin.left},0)`
-    .attr("fill", "none")
-    .attr("stroke", color(0))
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 2.0)
-    .attr("d", line2);
+    .attr("d", line(d.values));
+
   
 //   const pathLength = path.node().getTotalLength()+20;
 //   // D3 provides lots of transition options, have a play around here:
