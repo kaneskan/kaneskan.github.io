@@ -240,7 +240,7 @@ async function init() {
   // https://github.com/d3/d3-transition
   const transitionPath = d3.transition()
     .selectAll("path")
-    .delay(function(d, i) { if(i==0){return 0} else {return 10000+i*500};})
+    .delay(function(d, i) { if(i==0){return 0} else {return 5000+i*500};})
     .duration(2000)
     .ease(d3.easeSin);
   
