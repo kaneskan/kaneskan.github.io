@@ -271,6 +271,7 @@ async function init() {
 //     .delay(20000)
 //     .remove();
 
+// Region annotation
   chart
     .append("text")
     .attr("x", xScale(1990))
@@ -281,6 +282,84 @@ async function init() {
     .style("font-size", "12px")
     .style("font-weight", "bold")
     .text("World");
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(23))
+    .transition()
+    .delay(5000)
+    .style("fill", color(1))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("Central Europe and the Baltics");  
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(56))
+    .transition()
+    .delay(5000)
+    .style("fill", color(2))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("East Asia & Pacific");  
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(45))
+    .transition()
+    .delay(5000)
+    .style("fill", color(3))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("Europe & Central Asia");  
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(47))
+    .transition()
+    .delay(5000)
+    .style("fill", color(4))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("Latin America & Caribbean");  
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(70))
+    .transition()
+    .delay(5000)
+    .style("fill", color(5))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("North America");    
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(18))
+    .transition()
+    .delay(5000)
+    .style("fill", color(6))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("South Asia");
+  
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(13))
+    .transition()
+    .delay(5000)
+    .style("fill", color(7))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("Sub-Saharan Africa"); 
+  
   
 //   var mouseG = svg.append("g")
 //     .attr("class", "mouse-over-effects");
