@@ -225,12 +225,12 @@ async function init() {
 /* Format Data */
 var parseDate = d3.timeParse("%Y");
 data_u.forEach(function(d) { 
-  d[1].forEach(function(d) {
+//   d.values.forEach(function(d) {
     d.Year = parseDate(d.Year);
     d.Population = +d.Population;
     d.Urban_pop = +d.Urban_pop;   
     d.Rural_pop = +d.Rural_pop;    
-  });
+//   });
 });
     
   
