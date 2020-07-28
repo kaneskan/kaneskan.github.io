@@ -204,9 +204,17 @@ async function init() {
     .range([0, width])
     .domain(d3.extent(data, dataPoint => dataPoint.Year));
 
-  const line = d3.line()
+  const line1 = d3.line()
     .x(dataPoint => xScale(dataPoint.Year))
-    .y([dataPoint => yScale(dataPoint.Population),dataPoint => yScale(dataPoint.Urban_pop),dataPoint => yScale(dataPoint.Rural_pop)]);
+    .y([dataPoint => yScale(dataPoint.Population)]);
+  
+  const line2 = d3.line()
+    .x(dataPoint => xScale(dataPoint.Year))
+    .y([dataPoint => yScale(dataPoint.Urban_pop)]);
+  
+  const line3 = d3.line()
+    .x(dataPoint => xScale(dataPoint.Year))
+    .y([dataPoint => yScale(dataPoint.Rural_pop)]);
 
   // Create colors
   const color = d3.scaleOrdinal(d3.schemeCategory10);  
@@ -226,7 +234,7 @@ async function init() {
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", line);
+    .attr("d", [line1, line2, line3]);
   
 
   const pathLength = path.node().getTotalLength()+20;
