@@ -229,9 +229,9 @@ var parseDate = d3.timeParse("%Y");
 data_u.forEach(function(d) { 
 //   d.values.forEach(function(d) {
     d.Year = parseDate(d.Year);
-    d.Population = parseInt(d.Population);
-    d.Urban_pop = parseInt(d.Urban_pop);   
-    d.Rural_pop = parseInt(d.Rural_pop);    
+    d.Population = parseInt(+d.Population);
+    d.Urban_pop = parseInt(+d.Urban_pop);   
+    d.Rural_pop = parseInt(+d.Rural_pop);    
 //   });
 });
     
