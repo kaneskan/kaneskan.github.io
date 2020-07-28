@@ -249,12 +249,14 @@ data_u.forEach(function(d) {
     .attr("stroke-width", 2.0)
     .attr("d", line1);
   
-  svg.append("path")
+  chart.append("g")
+      .selectAll(".line")
       .data(data_u)
       .attr("class", "line")
       .attr("d", line2);
   
-  svg.append("path")
+  chart.append("g")
+      .selectAll(".line")
       .data(data_u)
       .attr("class", "line")
       .attr("d", line3);
