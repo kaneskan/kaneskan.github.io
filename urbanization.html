@@ -206,20 +206,14 @@ async function init() {
 
   const line = d3.line()
     .x(dataPoint => xScale(dataPoint.Year))
-    .y(dataPoint => yScale(dataPoint.Urban_per));
+    .y(dataPoint => yScale(dataPoint.Population));
 
   // Create colors
   const color = d3.scaleOrdinal(d3.schemeCategory10);  
   
   // Create data
-  const data_u = [data.filter(function(d){ return d.Country_code == "WLD";}), 
-                  data.filter(function(d){ return d.Country_code == "CEB";}),
-                  data.filter(function(d){ return d.Country_code == "EAS";}),
-                  data.filter(function(d){ return d.Country_code == "ECS";}),
-                  data.filter(function(d){ return d.Country_code == "LCN";}),
-                  data.filter(function(d){ return d.Country_code == "NAC";}),             
-                  data.filter(function(d){ return d.Country_code == "SAS";}),
-                  data.filter(function(d){ return d.Country_code == "SSF";})];    
+  const data_u = [data.filter(function(d){ return d.Country_code == "WLD";})]; 
+ 
   
   // Add path
   const path = chart.append("g")
@@ -271,117 +265,29 @@ async function init() {
 //     .delay(20000)
 //     .remove();
 
-// Region annotation
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(45))
-    .transition()
-    .delay(2000)
-    .style("fill", color(0))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("World");
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(59))
-    .transition()
-    .delay(5000)
-    .style("fill", color(1))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("Central Europe and the Baltics");  
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(37))
-    .transition()
-    .delay(5000)
-    .style("fill", color(2))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("East Asia & Pacific");  
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(65))
-    .transition()
-    .delay(5000)
-    .style("fill", color(3))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("Europe & Central Asia");  
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(70))
-    .transition()
-    .delay(5000)
-    .style("fill", color(4))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("Latin America & Caribbean");  
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(79))
-    .transition()
-    .delay(5000)
-    .style("fill", color(5))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("North America");    
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(22))
-    .transition()
-    .delay(5000)
-    .style("fill", color(6))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("South Asia");
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(30))
-    .transition()
-    .delay(5000)
-    .style("fill", color(7))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("Sub-Saharan Africa"); 
   
     // Append a vertical line to highlight the separation
-  chart
-    .append("line")
-      .attr("x1", xScale(1960))
-      .attr("x2", xScale(2019))
-      .attr("y1", yScale(68))
-      .attr("y2", yScale(68))
-      .transition()
-      .delay(7000)
-      .attr("stroke", "grey")
-      .attr("stroke-dasharray", "4");
+//   chart
+//     .append("line")
+//       .attr("x1", xScale(1960))
+//       .attr("x2", xScale(2019))
+//       .attr("y1", yScale(68))
+//       .attr("y2", yScale(68))
+//       .transition()
+//       .delay(7000)
+//       .attr("stroke", "grey")
+//       .attr("stroke-dasharray", "4");
             
-  chart
-    .append("text")
-    .attr("x", xScale(2004))
-    .attr("y", yScale(65))
-    .style("font-size", "12px")
-    .style("fill", color(7))
-    .style("font-weight", "bold")
-    .transition()
-    .delay(7000)
-    .text("2050 World Urbanization Forecasted");
+//   chart
+//     .append("text")
+//     .attr("x", xScale(2004))
+//     .attr("y", yScale(65))
+//     .style("font-size", "12px")
+//     .style("fill", color(7))
+//     .style("font-weight", "bold")
+//     .transition()
+//     .delay(7000)
+//     .text("2050 World Urbanization Forecasted");
   
 //   var mouseG = svg.append("g")
 //     .attr("class", "mouse-over-effects");
@@ -391,17 +297,6 @@ async function init() {
 //     .style("stroke", "black")
 //     .style("stroke-width", "1px")
 //     .style("opacity", "0");
-
-  // create a tooltip
-  var tooltip = d3.select(".svg")
-    .append("div")
-    .style("position", "absolute")
-    .style("visibility", "hidden")
-
-  path
-    .on("mouseover", function(d,i) {return tooltip.style("visibility", "visible").text(yScale(d));})
-    .on("mousemove", function() {return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
-    .on("mouseout", function() {return tooltip.style("visibility", "hidden");});  
 
   
   }
