@@ -213,14 +213,14 @@ async function init() {
   const color = d3.scaleOrdinal(d3.schemeCategory10);  
   
   // Create data
-  const data_u = [data.filter(function(d){ return d.Country_code == "WLD";}), 
-                  data.filter(function(d){ return d.Country_code == "CEB";}),
-                  data.filter(function(d){ return d.Country_code == "EAS";}),
-                  data.filter(function(d){ return d.Country_code == "ECS";}),
-                  data.filter(function(d){ return d.Country_code == "LCN";}),
-                  data.filter(function(d){ return d.Country_code == "NAC";}),             
-                  data.filter(function(d){ return d.Country_code == "SAS";}),
-                  data.filter(function(d){ return d.Country_code == "SSF";})];    
+  const data_u = [data.filter(function(d){ return d.Country_code == "WLD";})]; 
+//                   data.filter(function(d){ return d.Country_code == "CEB";}),
+//                   data.filter(function(d){ return d.Country_code == "EAS";}),
+//                   data.filter(function(d){ return d.Country_code == "ECS";}),
+//                   data.filter(function(d){ return d.Country_code == "LCN";}),
+//                   data.filter(function(d){ return d.Country_code == "NAC";}),             
+//                   data.filter(function(d){ return d.Country_code == "SAS";}),
+//                   data.filter(function(d){ return d.Country_code == "SSF";})];    
   
   // Add path
   const path = chart.append("g")
