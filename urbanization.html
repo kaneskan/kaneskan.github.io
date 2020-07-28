@@ -206,7 +206,7 @@ async function init() {
 
   const line = d3.line()
     .x(dataPoint => xScale(dataPoint.Year))
-    .y(dataPoint => yScale(dataPoint.Population));
+    .y([dataPoint => yScale(dataPoint.Population),dataPoint => yScale(dataPoint.Urban_pop),dataPoint => yScale(dataPoint.Rural_pop)]);
 
   // Create colors
   const color = d3.scaleOrdinal(d3.schemeCategory10);  
