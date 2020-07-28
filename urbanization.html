@@ -245,7 +245,7 @@ data_u.forEach(function(d) {
    
    path  
     .attr("fill", "none")
-    .attr("stroke", function(d,i) { return color(i);})
+    .attr("stroke", color(0))
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
@@ -253,7 +253,7 @@ data_u.forEach(function(d) {
   
   path
     .attr("fill", "none")
-    .attr("stroke", function(d,i) { return color(i);})
+    .attr("stroke", color(1))
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
@@ -261,7 +261,7 @@ data_u.forEach(function(d) {
   
   path
     .attr("fill", "none")
-    .attr("stroke", function(d,i) { return color(i);})
+    .attr("stroke", color(2))
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
