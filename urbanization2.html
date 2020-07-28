@@ -304,9 +304,9 @@ lines.selectAll("circle-group")
         .style("cursor", "pointer")
         .append("text")
         .attr("class", "text")
-        .text(`${d.price}`)
-        .attr("x", d => xScale(d.date) + 5)
-        .attr("y", d => yScale(d.price) - 10);
+        .text(`${d.Urban_per}`)
+        .attr("x", d => xScale(d.Year) + 5)
+        .attr("y", d => yScale(d.Urban_per) - 10);
     })
   .on("mouseout", function(d) {
       d3.select(this)
