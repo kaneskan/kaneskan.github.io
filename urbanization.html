@@ -255,8 +255,8 @@ async function init() {
     .append("g")
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(xScale)
-      .ticks(10)
       .style("font-size", "16px")
+      .ticks(10)
       .tickFormat(d3.format("d"))); 
   
   // Add the Y Axis
