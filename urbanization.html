@@ -234,7 +234,7 @@ var allGroup = ["Population", "Urban_pop", "Rural_pop"];
 var dataReady = allGroup.map( function(grpName) { // .map allows to do something for each element of the list
   return {
     name: grpName,
-    values: data.map(function(d) {
+    values: data_u.map(function(d) {
       return {time: d.Year, value: +d[grpName]};
     })
   };
