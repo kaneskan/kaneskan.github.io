@@ -224,11 +224,11 @@ data_u.forEach(function(d) {
 	
 /* Scale */
 var xScale = d3.scaleTime()
-  .domain(d3.extent(data_u[0].values, d => d.Year))
+  .domain(d3.extent(data, d => d.Year))
   .range([0, width-margin]);
 
 var yScale = d3.scaleLinear()
-  .domain([0, d3.max(data_u[0].values, d => d.Urban_per)])
+  .domain([0, d3.max(data, d => d.Urban_per)])
   .range([height-margin, 0]);
 
 var color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -272,9 +272,9 @@ lines.selectAll('.line-group')
   .style('opacity', lineOpacity)
   .on("mouseover", function(d) {
       d3.selectAll('.line')
-					.style('opacity', otherLinesOpacityHover);
+	.style('opacity', otherLinesOpacityHover);
       d3.selectAll('.circle')
-					.style('opacity', circleOpacityOnLineHover);
+	.style('opacity', circleOpacityOnLineHover);
       d3.select(this)
         .style('opacity', lineOpacityHover)
         .style("stroke-width", lineStrokeHover)
