@@ -49,7 +49,7 @@ p {
   text-align: center;
   padding: 5px 5px;
   text-decoration: none;
-  background-color: #444;
+  background-color: #888;
 }
 
 /* Change color on hover */
@@ -143,10 +143,7 @@ p {
   <p>How much urbanization has been growing?</p>   
 </div>
 <div class="topnav">
-  <a href="https://kaneskan.github.io/urbanization.html" style="margin:0px auto">1</a>
-  <a href="https://kaneskan.github.io/urbanization2.html" style="margin:0px auto">2</a>
-  <a href="https://kaneskan.github.io/urbanization3.html" style="margin:0px auto">3</a>
-  <button style="margin:0px auto">4</button>
+  <a href="https://kaneskan.github.io/urbanization2.html" style="float:right">Next</a>
 </div>      
     
 <div class="row">
@@ -255,7 +252,6 @@ async function init() {
     .append("g")
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(xScale)
-      .style("font-size", "16px")
       .ticks(10)
       .tickFormat(d3.format("d"))); 
   
