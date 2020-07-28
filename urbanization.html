@@ -363,7 +363,7 @@ async function init() {
     // Append a vertical line to highlight the separation
   chart
     .append("line")
-      .attr("x1", x(0))
+      .attr("x1", x(1960))
       .attr("x2", x(2019))
       .attr("y1", y(68))
       .attr("y2", y(68))
@@ -372,8 +372,8 @@ async function init() {
             
   chart
     .append("text")
-    .attr("x", x(190))
-    .attr("y", y(2012))
+    .attr("x", x(2013))
+    .attr("y", y(68))
     .text("threshold: 140")
     .style("font-size", "15px")
     .text("2050 World Urbanization Forecasted");
