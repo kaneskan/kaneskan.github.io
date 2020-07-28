@@ -374,12 +374,14 @@ async function init() {
             
   chart
     .append("text")
-    .attr("x", xScale(2008))
+    .attr("x", xScale(2004))
     .attr("y", yScale(65))
     .text("threshold: 140")
     .style("font-size", "12px")
     .style("fill", color(7))
     .style("font-weight", "bold")
+    .transition()
+    .delay(7000)
     .text("2050 World Urbanization Forecasted");
   
 //   var mouseG = svg.append("g")
