@@ -202,19 +202,20 @@ var circleRadiusHover = 6;
 
   
 // Create data
-const data_u = [data.filter(function(d){ return d.Country_code == "WLD";}), 
-	  data.filter(function(d){ return d.Country_code == "CEB";}),
-	  data.filter(function(d){ return d.Country_code == "EAS";}),
-	  data.filter(function(d){ return d.Country_code == "ECS";}),
-	  data.filter(function(d){ return d.Country_code == "LCN";}),
-	  data.filter(function(d){ return d.Country_code == "NAC";}),             
-	  data.filter(function(d){ return d.Country_code == "SAS";}),
-	  data.filter(function(d){ return d.Country_code == "SSF";})];   	
+const data_u = [{ name: "WLD", values: {data.filter(function(d){ return d.Country_code == "WLD";}},
+		{ name: "CEB", values: {data.filter(function(d){ return d.Country_code == "CEB";}},
+		{ name: "EAS", values: {data.filter(function(d){ return d.Country_code == "EAS";}},
+		{ name: "ECS", values: {data.filter(function(d){ return d.Country_code == "ECS";}},
+		{ name: "LCN", values: {data.filter(function(d){ return d.Country_code == "LCN";}},
+		{ name: "NAC", values: {data.filter(function(d){ return d.Country_code == "NAC";}},
+		{ name: "SAS", values: {data.filter(function(d){ return d.Country_code == "SAS";}},
+		{ name: "SSF", values: {data.filter(function(d){ return d.Country_code == "SSF";}}];
+
 	
 	
 /* Format Data */
 var parseDate = d3.timeParse("%Y");
-data.forEach(function(d) { 
+data_u.forEach(function(d) { 
   d.values.forEach(function(d) {
     d.Year = parseDate(d.Year);
     d.Urban_per = +d.Urban_per;    
