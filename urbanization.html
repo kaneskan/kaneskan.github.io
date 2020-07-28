@@ -230,7 +230,7 @@ async function init() {
     .enter().append("path")
 //     .attr("transform", `translate(${margin.left},0)`)
     .attr("fill", "none")
-//     .attr("stroke", function(d,i) { return color(i);})
+    .attr("stroke", function(d,i) { return color(i);})
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
