@@ -183,18 +183,11 @@ async function init() {
 
   // Create SVG and padding for the chart
 
-  const svg = d3.select("#chart")
-    .append("svg")
-    .attr("height", 400)
-    .attr("width", 800);
-  const margin = { top: 0, bottom: 20, left: 30, right: 20 };
-  const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
-  const width = +svg.attr("width") - margin.left - margin.right;
-  const height = +svg.attr("height") - margin.top - margin.bottom;
-//   const grp = chart
-//     .append("g");
-//     .attr("transform", `translate(-${margin.left},-${margin.top})`);
-
+var width = 500;
+var height = 300;
+var margin = 50;
+var duration = 250;
+	
 var lineOpacity = "0.25";
 var lineOpacityHover = "0.85";
 var otherLinesOpacityHover = "0.1";
@@ -206,28 +199,46 @@ var circleOpacityOnLineHover = "0.25"
 var circleRadius = 3;
 var circleRadiusHover = 6;
 
-  // Create scales
-  const yScale = d3.scaleLinear()
-    .range([height, 0])
-    .domain([10, 90]);
-//     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
-  const xScale = d3.scaleTime()
-    .range([0, width])
-    .domain(d3.extent(data, dataPoint => dataPoint.Year));
+  
+// Create data
+const data_u = [data.filter(function(d){ return d.Country_code == "WLD";}), 
+	  data.filter(function(d){ return d.Country_code == "CEB";}),
+	  data.filter(function(d){ return d.Country_code == "EAS";}),
+	  data.filter(function(d){ return d.Country_code == "ECS";}),
+	  data.filter(function(d){ return d.Country_code == "LCN";}),
+	  data.filter(function(d){ return d.Country_code == "NAC";}),             
+	  data.filter(function(d){ return d.Country_code == "SAS";}),
+	  data.filter(function(d){ return d.Country_code == "SSF";})];   	
+	
+	
+/* Format Data */
+var parseDate = d3.timeParse("%Y");
+data_u.forEach(function(d) { 
+  d.values.forEach(function(d) {
+    d.Year = parseDate(d.Year);
+    d.Urban_per = +d.Urban_per;    
+  });
+});	
+	
+/* Scale */
+var xScale = d3.scaleTime()
+  .domain(d3.extent(data[0].values, d => d.Year))
+  .range([0, width-margin]);
 
-  // Create colors
-  const color = d3.scaleOrdinal(d3.schemeCategory10);  
-  
-  // Create data
-  const data_u = [data.filter(function(d){ return d.Country_code == "WLD";}), 
-                  data.filter(function(d){ return d.Country_code == "CEB";}),
-                  data.filter(function(d){ return d.Country_code == "EAS";}),
-                  data.filter(function(d){ return d.Country_code == "ECS";}),
-                  data.filter(function(d){ return d.Country_code == "LCN";}),
-                  data.filter(function(d){ return d.Country_code == "NAC";}),             
-                  data.filter(function(d){ return d.Country_code == "SAS";}),
-                  data.filter(function(d){ return d.Country_code == "SSF";})];    
-  
+var yScale = d3.scaleLinear()
+  .domain([0, d3.max(data[0].values, d => d.Urban_per)])
+  .range([height-margin, 0]);
+
+var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+/* Add SVG */
+var svg = d3.select("#chart").append("svg")
+  .attr("width", (width+margin)+"px")
+  .attr("height", (height+margin)+"px")
+  .append('g')
+  .attr("transform", `translate(${margin}, ${margin})`);	
+	
+   
   /* Add line into SVG */
 var line = d3.line()
   .x(d => xScale(d.Year))
