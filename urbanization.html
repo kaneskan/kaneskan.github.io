@@ -240,19 +240,31 @@ data_u.forEach(function(d) {
   const path = chart.append("g")
     .selectAll(".line")
     .data(data_u)           
-    .enter().append("path")
-//     .attr("transform", `translate(${margin.left},0)`)
+    .enter().append("path");
+//     .attr("transform", `translate(${margin.left},0)`
+   
+   path  
     .attr("fill", "none")
     .attr("stroke", function(d,i) { return color(i);})
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", line1)
+    .attr("d", line1);
   
   path
+    .attr("fill", "none")
+    .attr("stroke", function(d,i) { return color(i);})
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 2.0)
     .attr("d", line2);
   
   path
+    .attr("fill", "none")
+    .attr("stroke", function(d,i) { return color(i);})
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 2.0)
     .attr("d", line3);
   
 //   const pathLength = path.node().getTotalLength()+20;
