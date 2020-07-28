@@ -143,6 +143,7 @@ p {
   <p>How much urbanization has been growing?</p>   
 </div>
 <div class="topnav">
+  <a href="https://kaneskan.github.io/urbanization.html" style="float:right">Back</a>	
   <a href="https://kaneskan.github.io/urbanization2.html" style="float:right">Next</a>
 </div>      
 
@@ -213,7 +214,7 @@ const data_u = [data.filter(function(d){ return d.Country_code == "WLD";}),
 	
 /* Format Data */
 var parseDate = d3.timeParse("%Y");
-data_u.forEach(function(d) { 
+data.forEach(function(d) { 
   d.values.forEach(function(d) {
     d.Year = parseDate(d.Year);
     d.Urban_per = +d.Urban_per;    
