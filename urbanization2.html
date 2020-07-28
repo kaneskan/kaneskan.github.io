@@ -200,7 +200,8 @@ async function init() {
   const yScale = d3.scaleLinear()
     .range([height, 0])
 //     .domain([0, 85]);
-    .domain([0, d3.max(data, dataPoint => dataPoint.Urban_pop)]);
+    .domain([0, dataPoint => dataPoint.Urban_pop]);
+//     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_pop)]);
   const xScale = d3.scaleTime()
     .range([0, width])
     .domain(d3.extent(data, dataPoint => dataPoint.Year));
