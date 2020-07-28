@@ -206,9 +206,9 @@ async function init() {
     .range([0, width])
     .domain(d3.extent(data, d => d.Year));
 
-  const line1 = d3.line()
-    .x(dataPoint => xScale(dataPoint.time))
-    .y(dataPoint => yScale(dataPoint.values));
+  const line = d3.line()
+    .x(d => xScale(d.time))
+    .y(d => yScale(d.values));
 
 
   // Create colors
