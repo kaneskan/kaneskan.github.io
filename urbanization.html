@@ -245,24 +245,24 @@ data_u.forEach(function(d) {
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", line1);
-//     .attr("d", line2)  
-//     .attr("d", line3);
+    .attr("d", line1)
+    .attr("d", line2)  
+    .attr("d", line3);
   
-//   const pathLength = path.node().getTotalLength()+20;
-//   // D3 provides lots of transition options, have a play around here:
-//   // https://github.com/d3/d3-transition
-//   const transitionPath = d3.transition()
-//     .selectAll("path")
-//     .delay(function(d, i) { if(i==0){return 0} else {return 2000+i*500};})
-//     .duration(2000)
-//     .ease(d3.easeSin);
+  const pathLength = path.node().getTotalLength()+20;
+  // D3 provides lots of transition options, have a play around here:
+  // https://github.com/d3/d3-transition
+  const transitionPath = d3.transition()
+    .selectAll("path")
+    .delay(function(d, i) { if(i==0){return 0} else {return 2000+i*500};})
+    .duration(2000)
+    .ease(d3.easeSin);
   
-//   path
-//     .attr("stroke-dashoffset", pathLength)
-//     .attr("stroke-dasharray", pathLength)
-//     .transition(transitionPath)
-//     .attr("stroke-dashoffset", 0);
+  path
+    .attr("stroke-dashoffset", pathLength)
+    .attr("stroke-dasharray", pathLength)
+    .transition(transitionPath)
+    .attr("stroke-dashoffset", 0);
 
 
   // Add the X Axis
