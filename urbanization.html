@@ -222,6 +222,15 @@ async function init() {
   // Create data
   const data_u = [data.filter(function(d){ return d.Country_code == "WLD";})]; 
  
+/* Format Data */
+var parseDate = d3.timeParse("%Y");
+data_u.forEach(function(d) { 
+  d.forEach(function(d) {
+    d.Year = parseDate(d.Year);
+    d.Urban_per = +d.Urban_per;    
+  });
+});
+    
   
   // Add path
   const path = chart.append("g")
