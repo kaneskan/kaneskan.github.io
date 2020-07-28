@@ -78,12 +78,12 @@ p {
 }  
   
 /* Right column */
-.rightcolumn {
+/* .rightcolumn {
   display: table-cell;
   float: left;
   width: 40%;
 /*   padding-left: 20px; */
-}
+} */
 
 /* Fake image */
 .fakeimg {
@@ -154,7 +154,7 @@ p {
         <div class="fakeimg" style="height:20px;">Source</div>
     </div>  
   </div>
-  <div class="rightcolumn">
+<!--   <div class="rightcolumn">
     <div class="card">
       <div class="text1">
         <p>fnsiuefhsifhsdihciosdiofjdjfifsd</p>
@@ -163,7 +163,7 @@ p {
         <p>asdfasdrgffgeafefaerfdsfsdafasdf</p>
       </div>
     </div>  
-  </div>
+  </div> -->
 </div>
 
 <!-- <div class="footer">
@@ -181,8 +181,8 @@ async function init() {
 
   const svg = d3.select("#chart")
     .append("svg")
-    .attr("height", 300)
-    .attr("width", 600);
+    .attr("height", 400)
+    .attr("width", 800);
   const margin = { top: 0, bottom: 20, left: 30, right: 20 };
   const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
   const width = +svg.attr("width") - margin.left - margin.right;
