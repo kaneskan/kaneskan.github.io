@@ -208,7 +208,7 @@ async function init() {
 
   const line = d3.line()
     .x(d => xScale(+d.time))
-    .y(d => yScale(+d.values));
+    .y(d => yScale(+d.value));
 
 
   // Create colors
@@ -234,7 +234,7 @@ var allGroup = ["Population", "Urban_pop", "Rural_pop"];
 var dataReady = allGroup.map( function(grpName) { // .map allows to do something for each element of the list
   return {
     name: grpName,
-    values: data_u.map(function(d) {
+    value: data_u.map(function(d) {
       return {time: d.Year, value: +d[grpName]};
     })
   };
@@ -254,7 +254,7 @@ var dataReady = allGroup.map( function(grpName) { // .map allows to do something
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", function(d){ return line(d.values) });
+    .attr("d", function(d){ return line(d.value) });
 
   
 //   const pathLength = path.node().getTotalLength()+20;
