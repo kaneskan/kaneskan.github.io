@@ -399,7 +399,7 @@ async function init() {
     .style("visibility", "hidden")
 
   path
-    .on("mouseover", function(d,i) {return tooltip.style("visibility", "visible").text(yScale(d);})
+    .on("mouseover", function(d,i) {return tooltip.style("visibility", "visible").text(yScale(d));})
     .on("mousemove", function() {return tooltip.style("top", event.pageY+"px").style("left", event.pageX+"px");})
     .on("mouseout", function() {return tooltip.style("visibility", "hidden");});  
 
