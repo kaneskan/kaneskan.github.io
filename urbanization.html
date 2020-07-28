@@ -186,7 +186,7 @@ async function init() {
   const svg = d3.select("#chart")
     .append("svg")
     .attr("height", 400)
-    .attr("width", 800);
+    .attr("width", 1200);
   const margin = { top: 0, bottom: 20, left: 30, right: 20 };
   const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
   const width = +svg.attr("width") - margin.left - margin.right;
@@ -297,7 +297,7 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(33))
+    .attr("y", yScale(37))
     .transition()
     .delay(5000)
     .style("fill", color(2))
@@ -319,7 +319,7 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(68))
+    .attr("y", yScale(70))
     .transition()
     .delay(5000)
     .style("fill", color(4))
