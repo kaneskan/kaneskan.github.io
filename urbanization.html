@@ -199,7 +199,8 @@ async function init() {
   const yScale = d3.scaleLinear()
     .range([height, 0])
 //     .domain([0, 7000000000]);
-    .domain([0, d3.max(data, d => d.Population)]);
+//     .domain([0, d3.max(data, d => d.Population)]);
+      .domain([0, d3.max(data, function(d) {return d.Population})]);
 
   const xScale = d3.scaleTime()
     .range([0, width])
