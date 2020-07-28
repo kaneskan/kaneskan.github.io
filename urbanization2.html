@@ -288,7 +288,7 @@ lines.selectAll('.line-group')
 //     })
   .append('path')
   .attr('class', 'line')  
-  .attr('d', d => line(d.values))
+  .attr('d', line)
   .style('stroke', (d, i) => color(i))
   .style('opacity', lineOpacity);
 //   .on("mouseover", function(d) {
