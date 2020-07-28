@@ -247,19 +247,19 @@ data_u.forEach(function(d) {
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", line1);
+    .attr("d", [line1, line2, line3]);
   
-  chart.append("g")
-      .selectAll(".line")
-      .data(data_u)
-      .attr("class", "line")
-      .attr("d", line2);
+//   chart.append("g")
+//       .selectAll(".line")
+//       .data(data_u)
+//       .attr("class", "line")
+//       .attr("d", line2);
   
-  chart.append("g")
-      .selectAll(".line")
-      .data(data_u)
-      .attr("class", "line")
-      .attr("d", line3);
+//   chart.append("g")
+//       .selectAll(".line")
+//       .data(data_u)
+//       .attr("class", "line")
+//       .attr("d", line3);
   
 //   const pathLength = path.node().getTotalLength()+20;
 //   // D3 provides lots of transition options, have a play around here:
