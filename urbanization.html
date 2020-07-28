@@ -249,29 +249,15 @@ data_u.forEach(function(d) {
     .attr("stroke-width", 2.0)
     .attr("d", line1);
   
-  const path = chart.append("g")
-    .selectAll(".line")
-    .data(data_u)           
-    .enter().append("path")
-//     .attr("transform", `translate(${margin.left},0)`
-    .attr("fill", "none")
-    .attr("stroke", color(0))
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 2.0)
-    .attr("d", line2);
+  svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", line2);
   
-  const path = chart.append("g")
-    .selectAll(".line")
-    .data(data_u)           
-    .enter().append("path")
-//     .attr("transform", `translate(${margin.left},0)`
-    .attr("fill", "none")
-    .attr("stroke", color(0))
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 2.0)
-    .attr("d", line3);
+  svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", line3);
   
 //   const pathLength = path.node().getTotalLength()+20;
 //   // D3 provides lots of transition options, have a play around here:
