@@ -255,7 +255,7 @@ var dataReady = allGroup.map( function(grpName) { // .map allows to do something
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", line(d.values));
+    .attr("d", d=>line(d.values));
 
   
 //   const pathLength = path.node().getTotalLength()+20;
