@@ -243,88 +243,81 @@ var dataReady = allGroup.map( function(grpName) { // .map allows to do something
 console.log(dataReady);  
   
   
-  // Add path
-  const path = chart.append("g")
-    .selectAll(".line")
-    .data(dataReady)           
-    .enter().append("path")
-//     .attr("transform", `translate(${margin.left},0)`
-    .attr("fill", "none")
-    .attr("stroke", function(d,i) {return color(i);})
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 2.0)
-    .attr("d", function(d){ return line(d.value) });
+//   // Add path
+//   const path = chart.append("g")
+//     .selectAll(".line")
+//     .data(dataReady)           
+//     .enter().append("path")
+// //     .attr("transform", `translate(${margin.left},0)`
+//     .attr("fill", "none")
+//     .attr("stroke", function(d,i) {return color(i);})
+//     .attr("stroke-linejoin", "round")
+//     .attr("stroke-linecap", "round")
+//     .attr("stroke-width", 2.0)
+//     .attr("d", function(d){ return line(d.value) });
 
   
-//   const pathLength = path.node().getTotalLength()+20;
-//   // D3 provides lots of transition options, have a play around here:
-//   // https://github.com/d3/d3-transition
-//   const transitionPath = d3.transition()
-//     .selectAll("path")
-//     .delay(function(d, i) { if(i==0){return 0} else {return 2000+i*500};})
-//     .duration(2000)
-//     .ease(d3.easeSin);
+// //   const pathLength = path.node().getTotalLength()+20;
+// //   // D3 provides lots of transition options, have a play around here:
+// //   // https://github.com/d3/d3-transition
+// //   const transitionPath = d3.transition()
+// //     .selectAll("path")
+// //     .delay(function(d, i) { if(i==0){return 0} else {return 2000+i*500};})
+// //     .duration(2000)
+// //     .ease(d3.easeSin);
   
-//   path
-//     .attr("stroke-dashoffset", pathLength)
-//     .attr("stroke-dasharray", pathLength)
-//     .transition(transitionPath)
-//     .attr("stroke-dashoffset", 0);
+// //   path
+// //     .attr("stroke-dashoffset", pathLength)
+// //     .attr("stroke-dasharray", pathLength)
+// //     .transition(transitionPath)
+// //     .attr("stroke-dashoffset", 0);
 
 
-  // Add the X Axis
-  chart
-    .append("g")
-    .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(xScale)
-      .ticks(10)
-      .tickFormat(d3.format("d"))); 
-  
-  // Add the Y Axis
-  chart
-    .append("g")
-    .attr("transform", `translate(0, 0)`)
-    .call(d3.axisLeft(yScale));
-
-  // Remove chart
+//   // Add the X Axis
 //   chart
-//     .transition()
-//     .delay(20000)
-//     .remove();
+//     .append("g")
+//     .attr("transform", `translate(0,${height})`)
+//     .call(d3.axisBottom(xScale)
+//       .ticks(10)
+//       .tickFormat(d3.format("d"))); 
+  
+//   // Add the Y Axis
+//   chart
+//     .append("g")
+//     .attr("transform", `translate(0, 0)`)
+//     .call(d3.axisLeft(yScale));
+
+//   // Remove chart
+// //   chart
+// //     .transition()
+// //     .delay(20000)
+// //     .remove();
 
   
-    // Append a vertical line to highlight the separation
-//   chart
-//     .append("line")
-//       .attr("x1", xScale(1960))
-//       .attr("x2", xScale(2019))
-//       .attr("y1", yScale(68))
-//       .attr("y2", yScale(68))
-//       .transition()
-//       .delay(7000)
-//       .attr("stroke", "grey")
-//       .attr("stroke-dasharray", "4");
+//     // Append a vertical line to highlight the separation
+// //   chart
+// //     .append("line")
+// //       .attr("x1", xScale(1960))
+// //       .attr("x2", xScale(2019))
+// //       .attr("y1", yScale(68))
+// //       .attr("y2", yScale(68))
+// //       .transition()
+// //       .delay(7000)
+// //       .attr("stroke", "grey")
+// //       .attr("stroke-dasharray", "4");
             
-//   chart
-//     .append("text")
-//     .attr("x", xScale(2004))
-//     .attr("y", yScale(65))
-//     .style("font-size", "12px")
-//     .style("fill", color(7))
-//     .style("font-weight", "bold")
-//     .transition()
-//     .delay(7000)
-//     .text("2050 World Urbanization Forecasted");
+// //   chart
+// //     .append("text")
+// //     .attr("x", xScale(2004))
+// //     .attr("y", yScale(65))
+// //     .style("font-size", "12px")
+// //     .style("fill", color(7))
+// //     .style("font-weight", "bold")
+// //     .transition()
+// //     .delay(7000)
+// //     .text("2050 World Urbanization Forecasted");
   
-//   var mouseG = svg.append("g")
-//     .attr("class", "mouse-over-effects");
 
-//   mouseG.append("path") // this is the black vertical line to follow mouse
-//     .attr("class", "mouse-line")
-//     .style("stroke", "black")
-//     .style("stroke-width", "1px")
-//     .style("opacity", "0");
 
   
   }
