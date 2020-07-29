@@ -13,8 +13,8 @@ body {
 /*   padding: 10px; */
   background: #f1f1f1;
 /*   margin: 0; */
-/*   margin-left: 200px;
-  margin-right: 200px; */
+   margin-left: 200px;
+  margin-right: 200px; 
 }  
   
 /* Header/Blog Title */
@@ -144,7 +144,7 @@ p {
 <!--   <h3>How much the world urbanization has been growing?</h3>    -->
 </div>
 <div class="text1">
-  <h3>How much the world urbanization has been growing?</h3>
+  <h3>How much the world urban population has been growing?</h3>
 </div>
 <div class="topnav">
   <a href="https://kaneskan.github.io/urbanization2.html" style="float:right">Next</a>
@@ -155,7 +155,7 @@ p {
 <div class="row">
   <div class="leftcolumn">
     <div class="card" style="text-align:center">
-      <p><b>The number of urban population from 1960 to 2019</b></p> 
+      <p><b>The number of world urban population from 1960 to 2019</b></p> 
       <div id="chart"></div>  
     </div>  
   </div>
@@ -187,7 +187,7 @@ async function init() {
   const svg = d3.select("#chart")
     .append("svg")
     .attr("height", 400)
-    .attr("width", 1200);
+    .attr("width", 800);
   const margin = { top: 20, bottom: 20, left: 100, right: 50 };
   const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
   const width = +svg.attr("width") - margin.left - margin.right;
@@ -348,7 +348,7 @@ console.log(data);
     .attr("y", yScale(6100000000))
     .attr("height", 60)
     .attr("width", 200)
-    .attr("fill", "#FFCEC4")
+    .attr("fill", "#ffffe0")
     // .transition()
     // .delay(6000)
     // .attr("stroke", "grey")
@@ -361,7 +361,7 @@ console.log(data);
     .attr("y", yScale(5400000000))
     .attr("height", 60)
     .attr("width", 200)
-    .attr("fill", "#CDFFC4")
+    .attr("fill", "#ffffe0")
     // .transition()
     // .delay(6000)
     // .attr("stroke", "grey")
@@ -374,7 +374,7 @@ console.log(data);
     .attr("y", yScale(1500000000))
     .attr("height", 60)
     .attr("width", 200)
-    .attr("fill", "#C4EDFF")
+    .attr("fill", "#ffffe0")
     // .transition()
     // .delay(6000)
     // .attr("stroke", "grey")
