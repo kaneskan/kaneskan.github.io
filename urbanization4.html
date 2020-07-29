@@ -118,27 +118,32 @@ p {
 
 .tooltip {
   position: absolute;
-  background-color: lightgray;
-  padding: 5px;
+  background-color: lightgrey;
+  padding: 20px;
+/*  width: 60px;
+  height: 12px;*/
+/*  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none; */
 }
 
 
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 1000px) {
+/*@media screen and (max-width: 1000px) {
   .leftcolumn, .rightcolumn {   
     width: 100%;
     padding: 0;
   }
 }
 
-/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+ Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other 
 @media screen and (max-width: 400px) {
   .topnav a {
     float: none;
     width: 100%;
   }
-}
+}*/
 </style>
 </head>
 
@@ -243,7 +248,9 @@ async function init() {
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", line);
+    .attr("d", line)
+    .on('mousemove', drawTooltip)
+    .on('mouseout', removeTooltip);
   
 
   const pathLength = path.node().getTotalLength()+20;
@@ -421,17 +428,16 @@ async function init() {
 /*Tooltip  */
 
 
-const tooltip = chart.append('div')
+var tooltip = d3.select('body').append('div')
                 .attr('class','tooltip');
 const tooltipLine = chart.append('line');
 
-let tipBox;
-    tipBox = chart.append('rect')
-    .attr('width', width)
-    .attr('height', height)
-    .attr('opacity', 0)
-    .on('mousemove', drawTooltip)
-    .on('mouseout', removeTooltip);
+let tipBox = chart.append('rect')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('opacity', 0)
+      .on('mousemove', drawTooltip)
+      .on('mouseout', removeTooltip);
 
   function removeTooltip() {
     if (tooltip) tooltip.style('display', 'none');
@@ -439,27 +445,46 @@ let tipBox;
   }
 
   function drawTooltip() {
-    const year = Math.floor((xScale.invert(d3.mouse(tipBox.node())[0]) + 2.5) / 5) * 5;
+    var year = Math.floor((xScale.invert(d3.mouse(tipBox.node())[0]) + 2.5) / 5) * 5;
     
-    // data_u.sort((a, b) => {
-    //   return b.Urban_per - a.Urban_per;
-    // })  
+    if (year >2019 ) {year = 2019;}           
+       
+    data_u.sort((a, b) => {
+      return b.Urban_per - a.Urban_per;
+    })  
       
-    tooltipLine.attr('stroke', 'yellow')
+    tooltipLine.attr('stroke', 'grey')
       .attr('x1', xScale(year))
       .attr('x2', xScale(year))
       .attr('y1', 0)
       .attr('y2', height);
     
-    tooltip.html(year)
+
+    tooltip
       .style('display', 'block')
-      .style('left', d3.event.pageX + 20)
-      .style('top', d3.event.pageY - 20)
+      .style('left', (d3.mouse(this)[0]+400)+"px")
+      .style('top', (d3.mouse(this)[1]+200)+"px")
+      .html(year)
+      .selectAll()
+      .data(data_u).enter()
+      .append('div')
+      .style('color', function(d,i) { return color(i);})
+      .html(d=> d[year-1960].Country_name+ " " +d[year-1960].Urban_per);
+
+
+    // tooltip.html(year)
+    //   .style('display', 'block')
+    //   .style('left', d3.event.pageX + 20)
+    //   .style('top', d3.event.pageY - 20)
       // .selectAll()
       // .data(data_u).enter()
       // .append('div')
       // .style('color', "red")
       // .html(d => d.Country_name + ': ' + d.Urban_per);
+
+
+
+
   }
   
   console.log(data_u); 
