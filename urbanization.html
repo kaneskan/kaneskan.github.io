@@ -235,12 +235,12 @@ var dataReady = allGroup.map( function(grpName) { // .map allows to do something
   return {
     name: grpName,
     value: data_u.map(function(d) {
-      return {time: d.Year, value: +d[grpName]};
+      return {time: +d.Year, value: +d[grpName]};
     })
   };
 });  
   
-console.log(data_u);  
+console.log(dataReady);  
   
   
 //   // Add path
