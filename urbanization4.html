@@ -38,7 +38,7 @@ p {
 .topnav {
   overflow: hidden;
   width: 100%;
-  background-color: #333;
+  background-color: rgb(132,151,176);
 }
 
 /* Style the topnav links */
@@ -49,7 +49,7 @@ p {
   text-align: center;
   padding: 10px 10px;
   text-decoration: none;
-  background-color: red;
+  background-color: rgb(47,85,151);
 }
 
 /* Change color on hover */
@@ -111,7 +111,7 @@ p {
 .text1 {
   padding: 1px;
   text-align: center;
-  background: lightblue;
+  background: rgb(222,235,247);
   margin: 0px;
 
 }
@@ -119,7 +119,7 @@ p {
 .tooltip {
   position: absolute;
   background-color: lightgrey;
-  padding: 20px;
+  padding: 10px;
 /*  width: 60px;
   height: 12px;*/
 /*  border: 0px;      
@@ -462,14 +462,16 @@ let tipBox = chart.append('rect')
 
     tooltip
       .style('display', 'block')
-      .style('left', (d3.mouse(this)[0]+400)+"px")
-      .style('top', (d3.mouse(this)[1]+200)+"px")
-      .html(year)
+      // .style('left', (d3.mouse(this)[0]+400)+"px")
+      // .style('top', (d3.mouse(this)[1]+200)+"px")
+      .style('left', "20px")
+      .style('top', "270px")
+      .html("<b>Year:"+year+"<br>")
       .selectAll()
       .data(data_u).enter()
       .append('div')
       .style('color', function(d,i) { return color(i);})
-      .html(d=> d[year-1960].Country_name+ " " +d[year-1960].Urban_per);
+      .html(d=> "<b>"+d[year-1960].Country_name+ "<br>%Urban: " +d[year-1960].Urban_per+", "+"Urban Pop: "+d[year-1960].Urban_pop+"<br></br>");
 
 
     // tooltip.html(year)

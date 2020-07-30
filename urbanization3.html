@@ -38,7 +38,7 @@ p {
 .topnav {
   overflow: hidden;
   width: 100%;
-  background-color: #333;
+  background-color: rgb(132,151,176);
 }
 
 /* Style the topnav links */
@@ -49,7 +49,7 @@ p {
   text-align: center;
   padding: 10px 10px;
   text-decoration: none;
-  background-color: red;
+  background-color: rgb(47,85,151);
 }
 
 /* Change color on hover */
@@ -111,7 +111,7 @@ p {
 .text1 {
   padding: 1px;
   text-align: center;
-  background: lightblue;
+  background: rgb(222,235,247);
   margin: 0px;
 
 }
@@ -236,14 +236,14 @@ async function init() {
     .attr("stroke-width", 2.0)
     .attr("d", line);
   
-  const delay_object = 5000;
+  const delay_object = 2000;
 
   const pathLength = path.node().getTotalLength()+20;
   // D3 provides lots of transition options, have a play around here:
   // https://github.com/d3/d3-transition
   const transitionPath = d3.transition()
     .selectAll("path")
-    .delay(function(d, i) { if(i==0){return 0} else {return i*delay_object};})
+    .delay(function(d, i) { return i*delay_object;})
     .duration(2000)
     .ease(d3.easeSin);
   
@@ -287,12 +287,13 @@ async function init() {
   //   .style("font-weight", "bold")
   //   .text("World");
   
+
   chart
     .append("text")
     .attr("x", xScale(1990))
     .attr("y", yScale(59))
     .transition()
-    .delay(0*delay_object)
+    .delay(1*delay_object-1000)
     .style("fill", color(0))
     .style("font-size", "12px")
     .style("font-weight", "bold")
@@ -301,9 +302,9 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(37))
+    .attr("y", yScale(40))
     .transition()
-    .delay(1*delay_object)
+    .delay(2*delay_object-1000)
     .style("fill", color(1))
     .style("font-size", "12px")
     .style("font-weight", "bold")
@@ -314,7 +315,7 @@ async function init() {
     .attr("x", xScale(1990))
     .attr("y", yScale(65))
     .transition()
-    .delay(2*delay_object)
+    .delay(3*delay_object-1000)
     .style("fill", color(2))
     .style("font-size", "12px")
     .style("font-weight", "bold")
@@ -325,7 +326,7 @@ async function init() {
     .attr("x", xScale(1990))
     .attr("y", yScale(70))
     .transition()
-    .delay(3*delay_object)
+    .delay(4*delay_object-1000)
     .style("fill", color(3))
     .style("font-size", "12px")
     .style("font-weight", "bold")
@@ -336,7 +337,7 @@ async function init() {
     .attr("x", xScale(1990))
     .attr("y", yScale(79))
     .transition()
-    .delay(4*delay_object)
+    .delay(5*delay_object-1000)
     .style("fill", color(4))
     .style("font-size", "12px")
     .style("font-weight", "bold")
@@ -347,7 +348,7 @@ async function init() {
     .attr("x", xScale(1990))
     .attr("y", yScale(22))
     .transition()
-    .delay(5*delay_object)
+    .delay(6*delay_object-1000)
     .style("fill", color(5))
     .style("font-size", "12px")
     .style("font-weight", "bold")
@@ -356,9 +357,9 @@ async function init() {
   chart
     .append("text")
     .attr("x", xScale(1990))
-    .attr("y", yScale(30))
+    .attr("y", yScale(31))
     .transition()
-    .delay(6*delay_object)
+    .delay(7*delay_object-1000)
     .style("fill", color(6))
     .style("font-size", "12px")
     .style("font-weight", "bold")
@@ -366,20 +367,125 @@ async function init() {
   
     // Append a vertical line to highlight the separation
 
-  
+// text1 annotation - USA
+var dt1=15000
   chart
-    // .append("rect")
-    // .attr("x", xScale(1980))
-    // .attr("y", yScale(30))
-    // .attr("height", 80)
-    // .attr("width", 300)
-    // .attr("fill", "#ffffe0")
-    // // .transition()
-    // // .delay(6000)
-    // // .attr("stroke", "grey")
-    // .attr("stroke-dasharray", "4");    
+    .append("text")
+    .attr("x", xScale(1962))
+    .attr("y", yScale(82))
+    .transition()
+    .delay(dt1)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("The least percentage increase is from North America (12%)")
+    .style("width", "10");
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt1)
+    .attr("cx", xScale(1974))
+    .attr("cy", yScale(80))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
 
- 
+  chart
+    .append("line")
+      .attr("x1", xScale(1974))
+      .attr("x2", xScale(1974))
+      .attr("y1", yScale(74))
+      .attr("y2", yScale(80))
+      .transition()
+      .delay(dt1)
+      .attr("stroke", "lightgrey")
+      .attr("stroke-dasharray", "4");
+
+ // text2 annotation - top 3
+var dt2=19000
+  chart
+    .append("text")
+    .attr("x", xScale(1963))
+    .attr("y", yScale(44))
+    .transition()
+    .delay(dt2)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("The 3 most highest percentage increases are ")
+    .style("width", "10"); 
+  chart
+    .append("text")
+    .attr("x", xScale(1963))
+    .attr("y", yScale(41))
+    .transition()
+    .delay(dt2)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("from East Asia & Pacific (37%), Latin America & ")
+    .style("width", "10");
+  chart
+    .append("text")
+    .attr("x", xScale(1963))
+    .attr("y", yScale(38))
+    .transition()
+    .delay(dt2)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("Caribbean (31%) and Sub-Saharan Africa (26%)")
+    .style("width", "10");  
+
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt2)
+    .attr("cx", xScale(1974))
+    .attr("cy", yScale(48))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
+  chart
+    .append("line")
+      .attr("x1", xScale(1974))
+      .attr("x2", xScale(1974))
+      .attr("y1", yScale(48))
+      .attr("y2", yScale(60))
+      .transition()
+      .delay(dt2)
+      .attr("stroke", "lightgrey")
+      .attr("stroke-dasharray", "4");
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt2)
+    .attr("cx", xScale(1977))
+    .attr("cy", yScale(32))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
+  chart
+    .append("line")
+      .attr("x1", xScale(1977))
+      .attr("x2", xScale(1977))
+      .attr("y1", yScale(26))
+      .attr("y2", yScale(31))
+      .transition()
+      .delay(dt2)
+      .attr("stroke", "lightgrey")
+      .attr("stroke-dasharray", "4");
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt2)
+    .attr("cx", xScale(1986))
+    .attr("cy", yScale(40))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
+  chart
+    .append("line")
+      .attr("x1", xScale(1986))
+      .attr("x2", xScale(1986))
+      .attr("y1", yScale(25))
+      .attr("y2", yScale(40))
+      .transition()
+      .delay(dt2)
+      .attr("stroke", "lightgrey")
+      .attr("stroke-dasharray", "4");            
   }
 </script>  
 </body>

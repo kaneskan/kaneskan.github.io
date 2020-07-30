@@ -38,7 +38,7 @@ p {
 .topnav {
   overflow: hidden;
   width: 100%;
-  background-color: #333;
+  background-color: rgb(132,151,176);
 }
 
 /* Style the topnav links */
@@ -49,7 +49,7 @@ p {
   text-align: center;
   padding: 10px 10px;
   text-decoration: none;
-  background-color: red;
+  background-color: rgb(47,85,151);
 }
 
 /* Change color on hover */
@@ -111,7 +111,7 @@ p {
 .text1 {
   padding: 1px;
   text-align: center;
-  background: lightblue;
+  background: rgb(222,235,247);
   margin: 0px;
 
 }
@@ -274,17 +274,7 @@ async function init() {
 //     .remove();
 
 // Region annotation
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(45))
-    .transition()
-    .delay(2000)
-    .style("fill", color(0))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("World");
-  
+
   // chart
   //   .append("text")
   //   .attr("x", xScale(1990))
@@ -363,6 +353,64 @@ async function init() {
   //   .text("Sub-Saharan Africa"); 
   
     // Append a vertical line to highlight the separation
+ 
+
+// text1 annotation - population
+var dt1=3000
+  chart
+    .append("text")
+    .attr("x", xScale(1990))
+    .attr("y", yScale(45))
+    .transition()
+    .delay(dt1-1000)
+    .style("fill", color(0))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("World");
+
+  chart
+    .append("text")
+    .attr("x", xScale(1980))
+    .attr("y", yScale(23))
+    .transition()
+    .delay(dt1)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("The percent of world urban population grew from ")
+    .style("width", "10");
+  chart  
+    .append("text")
+    .attr("x", xScale(1980))
+    .attr("y", yScale(20))
+    .transition()
+    .delay(dt1)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("33% to 56% over 59 years")
+    .style("width", "10");
+
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt1)
+    .attr("cx", xScale(1988))
+    .attr("cy", yScale(28))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
+
+  chart
+    .append("line")
+      .attr("x1", xScale(1988))
+      .attr("x2", xScale(1988))
+      .attr("y1", yScale(28))
+      .attr("y2", yScale(41))
+      .transition()
+      .delay(dt1)
+      .attr("stroke", "lightgrey")
+      .attr("stroke-dasharray", "4");
+
+var dt2=7000
+  
   chart
     .append("line")
       .attr("x1", xScale(1960))
@@ -370,10 +418,9 @@ async function init() {
       .attr("y1", yScale(68))
       .attr("y2", yScale(68))
       .transition()
-      .delay(3000)
+      .delay(dt2-2000)
       .attr("stroke", "grey")
-      .attr("stroke-dasharray", "4");
-            
+      .attr("stroke-dasharray", "4");            
   chart
     .append("text")
     .attr("x", xScale(2004))
@@ -382,32 +429,48 @@ async function init() {
     .style("fill", "grey")
     .style("font-weight", "bold")
     .transition()
-    .delay(3000)
+    .delay(dt2-2000)
     .text("2050 World Urbanization Forecasted");
-  
   chart
-    .append("rect")
-    .attr("x", xScale(1980))
-    .attr("y", yScale(30))
-    .attr("height", 80)
-    .attr("width", 300)
-    .attr("fill", "#ffffe0")
-    // .transition()
-    // .delay(6000)
-    // .attr("stroke", "grey")
-    .attr("stroke-dasharray", "4");    
+    .append("text")
+    .attr("x", xScale(1965))
+    .attr("y", yScale(57))
+    .transition()
+    .delay(dt2)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("UN has predicted that the percent of world urban ")
+    .style("width", "10");
+  chart  
+    .append("text")
+    .attr("x", xScale(1965))
+    .attr("y", yScale(54))
+    .transition()
+    .delay(dt2)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("population will reach 68% in 2050")
+    .style("width", "10");
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt2) 
+    .attr("cx", xScale(1974))
+    .attr("cy", yScale(60))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
 
   chart
-    .append("rect")
-    .attr("x", xScale(1965))
-    .attr("y", yScale(65))
-    .attr("height", 80)
-    .attr("width", 300)
-    .attr("fill", "#ffffe0")
-    // .transition()
-    // .delay(6000)
-    // .attr("stroke", "grey")
-    .attr("stroke-dasharray", "4");    
+    .append("line")
+    .attr("x1", xScale(1974))
+    .attr("x2", xScale(1974))
+    .attr("y1", yScale(60))
+    .attr("y2", yScale(68))
+    .transition()
+    .delay(dt2)
+    .attr("stroke", "lightgrey")
+    .attr("stroke-dasharray", "4");
+
 
  
   }
