@@ -38,7 +38,7 @@ p {
 .topnav {
   overflow: hidden;
   width: 100%;
-  background-color: #333;
+  background-color: rgb(132,151,176);
 }
 
 /* Style the topnav links */
@@ -49,7 +49,7 @@ p {
   text-align: center;
   padding: 10px 10px;
   text-decoration: none;
-  background-color: red;
+  background-color: rgb(47,85,151);
 }
 
 /* Change color on hover */
@@ -111,7 +111,7 @@ p {
 .text1 {
   padding: 1px;
   text-align: center;
-  background: lightblue;
+  background: rgb(222,235,247);
   margin: 0px;
 
 }
@@ -146,10 +146,10 @@ p {
 <div class="text1">
   <h3>How much the world urban population has been growing?</h3>
 </div>
+ 
 <div class="topnav">
   <a href="https://kaneskan.github.io/urbanization2.html" style="float:right">Next</a>
-</div>      
-
+</div>  
 
   
 <div class="row">
@@ -157,7 +157,7 @@ p {
     <div class="card" style="text-align:center">
       <p><b>The number of world urban population from 1960 to 2019</b></p> 
       <div id="chart"></div>  
-    </div>  
+    </div>     
   </div>
 <!--   <div class="rightcolumn">
     <div class="card">
@@ -266,7 +266,7 @@ console.log(data);
   // https://github.com/d3/d3-transition
   const transitionPath = d3.transition()
     .selectAll("path")
-    .delay(function(d, i) { if(i==0){return 0} else {return 2000+i*500};})
+    .delay(function(d, i) { return 2000+i*5000;})
     .duration(2000)
     .ease(d3.easeSin);
   
@@ -298,87 +298,238 @@ console.log(data);
 // //     .remove();
 
 /* Add annotiation */
+
+
+// text1 annotation - population
+var dt1=4000
   chart
     .append("text")
-    .attr("x", xScale(1990))
+    .attr("x", xScale(1987))
     .attr("y", yScale(6000000000))
     .transition()
-    .delay(2000)
+    .delay(dt1-1000)
     .style("fill", color(0))
     .style("font-size", "12px")
     .style("font-weight", "bold")
     .text("Population");
-  
   chart
     .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(1900000000))
+    .attr("x", xScale(1965))
+    .attr("y", yScale(5700000000))
     .transition()
-    .delay(5000)
-    .style("fill", color(1))
+    .delay(dt1)
+    .style("fill", "grey")
     .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("Urbanization");  
+    .text("The number of world population grew from ")
+    .style("width", "10");
+  chart  
+    .append("text")
+    .attr("x", xScale(1965))
+    .attr("y", yScale(5400000000))
+    .transition()
+    .delay(dt1)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("3Bn to 7.7Bn with CAGR of 1.6% over 59 years")
+    .style("width", "10");
+
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt1)
+    .attr("cx", xScale(1975))
+    .attr("cy", yScale(5100000000))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
+
+  chart
+    .append("line")
+      .attr("x1", xScale(1975))
+      .attr("x2", xScale(1975))
+      .attr("y1", yScale(4100000000))
+      .attr("y2", yScale(5100000000))
+      .transition()
+      .delay(dt1)
+      .attr("stroke", "lightgrey")
+      .attr("stroke-dasharray", "4");
+
+
+// text2 annotation
+var dt2=15000
   
   chart
     .append("text")
-    .attr("x", xScale(1990))
+    .attr("x", xScale(1987))
     .attr("y", yScale(3200000000))
     .transition()
-    .delay(5000)
+    .delay(dt2-1000)
     .style("fill", color(2))
     .style("font-size", "12px")
     .style("font-weight", "bold")
     .text("Ruralization");  
+  chart
+    .append("text")
+    .attr("x", xScale(1995))
+    .attr("y", yScale(5200000000))
+    .transition()
+    .delay(dt2)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("The number of world rural population grew from ")
+    .style("width", "10");
+  chart  
+    .append("text")
+    .attr("x", xScale(1995))
+    .attr("y", yScale(4900000000))
+    .transition()
+    .delay(dt2)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("2.0Bn in 1960 to 3.4Bn in 2000 with CAGR of 1.2% ")
+    .style("width", "10");
+  chart  
+    .append("text")
+    .attr("x", xScale(1995))
+    .attr("y", yScale(4600000000))
+    .transition()
+    .delay(dt2)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("and remain stable after that")
+    .style("width", "10");    
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt2) 
+    .attr("cx", xScale(2001))
+    .attr("cy", yScale(4200000000))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
 
+  chart
+    .append("line")
+      .attr("x1", xScale(2001))
+      .attr("x2", xScale(2001))
+      .attr("y1", yScale(3300000000))
+      .attr("y2", yScale(4200000000))
+      .transition()
+    .delay(dt2)
+      .attr("stroke", "lightgrey")
+      .attr("stroke-dasharray", "4");
+
+// text3 annotation - Urbanization
+var dt3=9000
+  chart
+    .append("text")
+    .attr("x", xScale(1987))
+    .attr("y", yScale(1900000000))
+    .transition()
+    .delay(dt3-1000)
+    .style("fill", color(1))
+    .style("font-size", "12px")
+    .style("font-weight", "bold")
+    .text("Urbanization");  
+  chart
+    .append("text")
+    .attr("x", xScale(1974))
+    .attr("y", yScale(700000000))
+    .transition()
+    .delay(dt3)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("The number of world urban population grew from ")
+    .style("width", "10");
+  chart  
+    .append("text")
+    .attr("x", xScale(1974))
+    .attr("y", yScale(400000000))
+    .transition()
+    .delay(dt3)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("1Bn to 4.3Bn with CAGR of 2.5% over 59 years")
+    .style("width", "10");
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt3)
+    .attr("cx", xScale(1984))
+    .attr("cy", yScale(1100000000))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
+
+  chart
+    .append("line")
+    .attr("x1", xScale(1984))
+    .attr("x2", xScale(1984))
+    .attr("y1", yScale(1100000000))
+    .attr("y2", yScale(1900000000))
+    .transition()
+    .delay(dt3)
+    .attr("stroke", "lightgrey")
+    .attr("stroke-dasharray", "4");
+
+// text4 annotation
+var dt4=18000
   chart
     .append("circle")
     .attr("cx", xScale(2007))
     .attr("cy", yScale(3300000000))
-    .attr("r", 20)
+    .attr("r", 10)
     .attr("fill", "none")
     .transition()
-    .delay(6000)
+    .delay(dt4)
     .attr("stroke", "grey")
+    .attr("stroke-dasharray", "4");
+  chart
+    .append("text")
+    .attr("x", xScale(1996))
+    .attr("y", yScale(2000000000))
+    .transition()
+    .delay(dt4)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("The number of urban population crossed ")
+    .style("width", "10");
+  chart  
+    .append("text")
+    .attr("x", xScale(1996))
+    .attr("y", yScale(1700000000))
+    .transition()
+    .delay(dt4)
+    .style("fill", "grey")
+    .style("font-size", "12px")
+    .text("with the number of rural population in 2007")
+    .style("width", "10");
+  chart
+    .append("circle")
+    .transition()
+    .delay(dt4) 
+    .attr("cx", xScale(1984))
+    .attr("cy", yScale(17000000000))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");
+
+  chart
+    .append("line")
+    .attr("x1", xScale(2007))
+    .attr("x2", xScale(2007))
+    .attr("y1", yScale(2300000000))
+    .attr("y2", yScale(3000000000))
+    .transition()
+    .delay(dt4)
+    .attr("stroke", "lightgrey")
     .attr("stroke-dasharray", "4");
 
   chart
-    .append("rect")
-    .attr("x", xScale(1965))
-    .attr("y", yScale(6100000000))
-    .attr("height", 60)
-    .attr("width", 200)
-    .attr("fill", "#ffffe0")
-    // .transition()
-    // .delay(6000)
-    // .attr("stroke", "grey")
-    .attr("stroke-dasharray", "4");          
+    .append("circle")
+    .transition()
+    .delay(dt4)
+    .attr("cx", xScale(2007))
+    .attr("cy", yScale(2300000000))
+    .attr("r", 5)
+    .attr("fill", "lightgrey");    
 
-
-  chart
-    .append("rect")
-    .attr("x", xScale(1995))
-    .attr("y", yScale(5400000000))
-    .attr("height", 60)
-    .attr("width", 200)
-    .attr("fill", "#ffffe0")
-    // .transition()
-    // .delay(6000)
-    // .attr("stroke", "grey")
-    .attr("stroke-dasharray", "4");   
-
-
-  chart
-    .append("rect")
-    .attr("x", xScale(1983))
-    .attr("y", yScale(1500000000))
-    .attr("height", 60)
-    .attr("width", 200)
-    .attr("fill", "#ffffe0")
-    // .transition()
-    // .delay(6000)
-    // .attr("stroke", "grey")
-    .attr("stroke-dasharray", "4");   
 
   
 //     // Append a vertical line to highlight the separation
@@ -389,7 +540,7 @@ console.log(data);
 // //       .attr("y1", yScale(68))
 // //       .attr("y2", yScale(68))
 // //       .transition()
-// //       .delay(7000)
+// //       .delay(dt3)
 // //       .attr("stroke", "grey")
 // //       .attr("stroke-dasharray", "4");
             
@@ -401,7 +552,7 @@ console.log(data);
 // //     .style("fill", color(7))
 // //     .style("font-weight", "bold")
 // //     .transition()
-// //     .delay(7000)
+// //     .delay(dt3)
 // //     .text("2050 World Urbanization Forecasted");
   
 
