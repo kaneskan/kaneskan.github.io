@@ -355,7 +355,7 @@ async function init() {
     // Append a vertical line to highlight the separation
  
 
-// text1 annotation - population
+// text1 annotation - world
 var dt1=3000
   chart
     .append("text")
@@ -409,6 +409,7 @@ var dt1=3000
       .attr("stroke", "lightgrey")
       .attr("stroke-dasharray", "4");
 
+// text2 annotation - 2050 target
 var dt2=7000
   
   chart
@@ -434,7 +435,7 @@ var dt2=7000
   chart
     .append("text")
     .attr("x", xScale(1965))
-    .attr("y", yScale(57))
+    .attr("y", yScale(56))
     .transition()
     .delay(dt2)
     .style("fill", "grey")
@@ -444,7 +445,7 @@ var dt2=7000
   chart  
     .append("text")
     .attr("x", xScale(1965))
-    .attr("y", yScale(54))
+    .attr("y", yScale(53))
     .transition()
     .delay(dt2)
     .style("fill", "grey")

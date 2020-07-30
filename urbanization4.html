@@ -390,16 +390,16 @@ async function init() {
   //     .attr("stroke", "grey")
   //     .attr("stroke-dasharray", "4");
             
-  // chart
-  //   .append("text")
-  //   .attr("x", xScale(2004))
-  //   .attr("y", yScale(65))
-  //   .style("font-size", "12px")
-  //   .style("fill", "grey")
-  //   .style("font-weight", "bold")
-  //   .transition()
-  //   .delay(3000)
-  //   .text("2050 World Urbanization Forecasted");
+  chart
+    .append("text")
+    .attr("x", xScale(2010))
+    .attr("y", yScale(20))
+    .style("font-size", "16px")
+    .style("fill", "red")
+    .style("font-weight", "bold")
+    // .transition()
+    // .delay(3000)
+    .text("Hover me!");
   
   // chart
   //   .append("rect")
@@ -439,8 +439,10 @@ let tipBox = chart.append('rect')
       .on('mousemove', drawTooltip)
       .on('mouseout', removeTooltip);
 
+
   function removeTooltip() {
     if (tooltip) tooltip.style('display', 'none');
+    if (tipBox) tipBox.style('opacity', '0');
     if (tooltipLine) tooltipLine.attr('stroke', 'none');
   }
 
@@ -466,24 +468,17 @@ let tipBox = chart.append('rect')
       // .style('top', (d3.mouse(this)[1]+200)+"px")
       .style('left', "20px")
       .style('top', "270px")
-      .html("<b>Year:"+year+"<br>")
+      .html("<p style='font-size:10px'><b>Year:"+year+"</p>")
       .selectAll()
       .data(data_u).enter()
       .append('div')
       .style('color', function(d,i) { return color(i);})
-      .html(d=> "<b>"+d[year-1960].Country_name+ "<br>%Urban: " +d[year-1960].Urban_per+", "+"Urban Pop: "+d[year-1960].Urban_pop+"<br></br>");
+      .html(d=> "<p style='font-size:10px'><b>"+d[year-1960].Country_name+ "<br>%Urban: " +Math.round(d[year-1960].Urban_per*10)/10+"%, "+"Urban Pop: "+Math.round(d[year-1960].Urban_pop/10000000)/100+"Bn<br></br></p>");
 
-
-    // tooltip.html(year)
-    //   .style('display', 'block')
-    //   .style('left', d3.event.pageX + 20)
-    //   .style('top', d3.event.pageY - 20)
-      // .selectAll()
-      // .data(data_u).enter()
-      // .append('div')
-      // .style('color', "red")
-      // .html(d => d.Country_name + ': ' + d.Urban_per);
-
+    // d3.select(this)
+    tipBox
+      .style("fill","grey")   
+      .style("opacity","0.03");
 
 
 
