@@ -118,7 +118,7 @@ p {
 
 .tooltip {
   position: absolute;
-  background-color: lightgrey;
+  background-color: seashell;
   padding: 10px;
 /*  width: 60px;
   height: 12px;*/
@@ -248,9 +248,7 @@ async function init() {
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 2.0)
-    .attr("d", line)
-    .on('mousemove', drawTooltip)
-    .on('mouseout', removeTooltip);
+    .attr("d", line);
   
 
   const pathLength = path.node().getTotalLength()+20;
@@ -467,13 +465,16 @@ let tipBox = chart.append('rect')
       // .style('left', (d3.mouse(this)[0]+400)+"px")
       // .style('top', (d3.mouse(this)[1]+200)+"px")
       .style('left', "20px")
-      .style('top', "270px")
+      .style('top', "200px")
+      // .style('top', "270px")
       .html("<p style='font-size:10px'><b>Year:"+year+"</p>")
       .selectAll()
       .data(data_u).enter()
       .append('div')
       .style('color', function(d,i) { return color(i);})
-      .html(d=> "<p style='font-size:10px'><b>"+d[year-1960].Country_name+ "<br>%Urban: " +Math.round(d[year-1960].Urban_per*10)/10+"%, "+"Urban Pop: "+Math.round(d[year-1960].Urban_pop/10000000)/100+"Bn<br></br></p>");
+      .html(d=> "<p style='font-size:10px'><b>"+d[year-1960].Country_name+ "<br>%Urban: " +Math.round(d[year-1960].Urban_per*10)/10+"%, "+
+        "Urban Pop: "+Math.round(d[year-1960].Urban_pop/10000000)/100+"Bn, "+
+        "Rural Pop: "+Math.round(d[year-1960].Rural_pop/10000000)/100+"Bn<br></br></p>");
 
     // d3.select(this)
     tipBox
