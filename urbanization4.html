@@ -54,8 +54,8 @@ p {
 
 /* Change color on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: blue;
+  color: #f2f2f2;
 }
 
 .row {
@@ -159,8 +159,11 @@ p {
   <h3>How much the world urban population has been growing?</h3>
 </div>
 <div class="topnav">
-  <a href="https://kaneskan.github.io/urbanization3.html" style="float:left">Back</a>
-<!--   <a href="https://kaneskan.github.io/urbanization3.html" style="float:right">Next</a>   -->
+  <a style="float:right;">Next</a>
+  <a style="float:right;background-color:rgb(0,0,0)">4</a>
+  <a href="https://kaneskan.github.io/urbanization3.html" style="float:right">3</a>
+  <a href="https://kaneskan.github.io/urbanization2.html" style="float:right">2</a>            
+  <a href="https://kaneskan.github.io/urbanization.html" style="float:right">1</a>  
 </div>      
 
 
@@ -169,6 +172,8 @@ p {
   <div class="leftcolumn">
     <div class="card" style="text-align:center">
       <p><b>The percent of regional urban population from 1960 to 2019</b></p> 
+      <select id="selectButton"></select>
+
       <div id="chart"></div>  
 
     </div>  
@@ -197,75 +202,43 @@ p {
 async function init() { 
   const data = await d3.csv('https://kaneskan.github.io/Urbanization.csv');
 
+  // Create data
+  var data_u = [{ name: "World", values: data.filter(function(d){ return d.Country_code == "WLD";})},
+    { name: "Central Europe and the Baltics", values: data.filter(function(d){ return d.Country_code == "CEB";})},
+    { name: "East Asia & Pacific", values: data.filter(function(d){ return d.Country_code == "EAS";})},
+    { name: "Europe & Central Asia", values: data.filter(function(d){ return d.Country_code == "ECS";})},
+    { name: "Latin America & Caribbean", values: data.filter(function(d){ return d.Country_code == "LCN";})},
+    { name: "North America", values: data.filter(function(d){ return d.Country_code == "NAC";})},
+    { name: "South Asia", values: data.filter(function(d){ return d.Country_code == "SAS";})},
+    { name: "Sub-Saharan Africa", values: data.filter(function(d){ return d.Country_code == "SSF";})}];
+
   // Create SVG and padding for the chart
 
-  const svg = d3.select("#chart")
+  var svg = d3.select("#chart")
     .append("svg")
     .attr("height", 400)
     .attr("width", 800);
-  const margin = { top: 20, bottom: 20, left: 30, right: 50 };
-  const chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
-  const width = +svg.attr("width") - margin.left - margin.right;
-  const height = +svg.attr("height") - margin.top - margin.bottom;
+  var margin = { top: 20, bottom: 20, left: 30, right: 50 };
+  var chart = svg.append("g").attr("transform", `translate(${margin.left},0)`);
+  var width = +svg.attr("width") - margin.left - margin.right;
+  var height = +svg.attr("height") - margin.top - margin.bottom;
 //   const grp = chart
 //     .append("g");
 //     .attr("transform", `translate(-${margin.left},-${margin.top})`);
 
   // Create scales
-  const yScale = d3.scaleLinear()
+  var yScale = d3.scaleLinear()
     .range([height, 0])
-    .domain([0, 85]);
-//     .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
-  const xScale = d3.scaleLinear()
+    .domain([0, d3.max(data, dataPoint => dataPoint.Urban_per)]);
+  var xScale = d3.scaleLinear()
     .range([0, width])
     .domain(d3.extent(data, dataPoint => dataPoint.Year));
 
-  const line = d3.line()
-    .x(dataPoint => xScale(dataPoint.Year))
-    .y(dataPoint => yScale(dataPoint.Urban_per));
-
-  // Create colors
-  const color = d3.scaleOrdinal(d3.schemeCategory10);  
-  
-  // Create data
-  const data_u = [data.filter(function(d){ return d.Country_code == "WLD";}), 
-                  data.filter(function(d){ return d.Country_code == "CEB";}),
-                  data.filter(function(d){ return d.Country_code == "EAS";}),
-                  data.filter(function(d){ return d.Country_code == "ECS";}),
-                  data.filter(function(d){ return d.Country_code == "LCN";}),
-                  data.filter(function(d){ return d.Country_code == "NAC";}),             
-                  data.filter(function(d){ return d.Country_code == "SAS";}),
-                  data.filter(function(d){ return d.Country_code == "SSF";})];    
-  
-  // Add path
-  const path = chart.append("g")
-    .selectAll(".line")
-    .data(data_u)           
-    .enter().append("path")
-//     .attr("transform", `translate(${margin.left},0)`)
-    .attr("fill", "none")
-    .attr("stroke", function(d,i) { return color(i);})
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 2.0)
-    .attr("d", line);
-  
-
-  const pathLength = path.node().getTotalLength()+20;
-  // D3 provides lots of transition options, have a play around here:
-  // https://github.com/d3/d3-transition
-  const transitionPath = d3.transition()
-    .selectAll("path")
-    .delay(function(d, i) { if(i==0){return 0} else {return 2000+i*500};})
-    .duration(2000)
-    .ease(d3.easeSin);
-  
-  // path
-  //   .attr("stroke-dashoffset", pathLength)
-  //   .attr("stroke-dasharray", pathLength)
-  //   .transition(transitionPath)
-  //   .attr("stroke-dashoffset", 0);
-
+  // Add the Y Axis
+  chart
+    .append("g")
+    .attr("transform", `translate(0, 0)`)
+    .call(d3.axisLeft(yScale));
 
   // Add the X Axis
   chart
@@ -275,155 +248,39 @@ async function init() {
       .ticks(10)
       .tickFormat(d3.format("d"))); 
   
-  // Add the Y Axis
-  chart
-    .append("g")
-    .attr("transform", `translate(0, 0)`)
-    .call(d3.axisLeft(yScale));
 
-  // Remove chart
-//   chart
-//     .transition()
-//     .delay(20000)
-//     .remove();
+  var line = d3.line()
+    .x(dataPoint => xScale(dataPoint.Year))
+    .y(dataPoint => yScale(dataPoint.Urban_per));
 
-// Region annotation
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(45))
-    // .transition()
-    // .delay(2000)
-    .style("fill", color(0))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("World");
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(59))
-    // .transition()
-    // .delay(5000)
-    .style("fill", color(1))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("Central Europe and the Baltics");  
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(37))
-    // .transition()
-    // .delay(5000)
-    .style("fill", color(2))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("East Asia & Pacific");  
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(65))
-    // .transition()
-    // .delay(5000)
-    .style("fill", color(3))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("Europe & Central Asia");  
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(70))
-    // .transition()
-    // .delay(5000)
-    .style("fill", color(4))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("Latin America & Caribbean");  
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(79))
-    // .transition()
-    // .delay(5000)
-    .style("fill", color(5))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("North America");    
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(22))
-    // .transition()
-    // .delay(5000)
-    .style("fill", color(6))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("South Asia");
-  
-  chart
-    .append("text")
-    .attr("x", xScale(1990))
-    .attr("y", yScale(30))
-    // .transition()
-    // .delay(5000)
-    .style("fill", color(7))
-    .style("font-size", "12px")
-    .style("font-weight", "bold")
-    .text("Sub-Saharan Africa"); 
-  
-    // Append a vertical line to highlight the separation
-  // chart
-  //   .append("line")
-  //     .attr("x1", xScale(1960))
-  //     .attr("x2", xScale(2019))
-  //     .attr("y1", yScale(68))
-  //     .attr("y2", yScale(68))
-  //     .transition()
-  //     .delay(3000)
-  //     .attr("stroke", "grey")
-  //     .attr("stroke-dasharray", "4");
-            
-  chart
-    .append("text")
-    .attr("x", xScale(2010))
-    .attr("y", yScale(20))
-    .style("font-size", "16px")
-    .style("fill", "red")
-    .style("font-weight", "bold")
-    // .transition()
-    // .delay(3000)
-    .text("Hover me!");
-  
-  // chart
-  //   .append("rect")
-  //   .attr("x", xScale(1980))
-  //   .attr("y", yScale(30))
-  //   .attr("height", 80)
-  //   .attr("width", 300)
-  //   .attr("fill", "#ffffe0")
-  //   // .transition()
-  //   // .delay(6000)
-  //   // .attr("stroke", "grey")
-  //   .attr("stroke-dasharray", "4");    
+  var allGroup = d3.map(data_u, function(d){return(d.name)}).keys();  
 
-  // chart
-  //   .append("rect")
-  //   .attr("x", xScale(1965))
-  //   .attr("y", yScale(65))
-  //   .attr("height", 80)
-  //   .attr("width", 300)
-  //   .attr("fill", "#ffffe0")
-  //   // .transition()
-  //   // .delay(6000)
-  //   // .attr("stroke", "grey")
-  //   .attr("stroke-dasharray", "4");   
+  // Create colors
+  var myColor = d3.scaleOrdinal()
+    .domain(allGroup)
+    .range(d3.schemeCategory10);
+  
 
-/*Tooltip  */
+
+  // add the options to the button
+  d3.select("#selectButton")
+    .selectAll('myOptions')
+    .data(allGroup)
+    .enter()
+    .append('option')
+    .text(function (d) { return d; }) // text showed in the menu
+    .attr("value", function (d) { return d; }); // corresponding value returned by the button
+
+
+
+  var path = chart.append('g')
+    .append("path")
+    .data(data_u.filter(function(d){return d.name==allGroup[0]}))
+    .attr("d", d=>line(d.values))
+    .attr("stroke", function(d){ return myColor("World") })
+    .style("stroke-width", 4)
+    .style("fill", "none");
+
 
 
 var tooltip = d3.select('body').append('div')
@@ -434,8 +291,10 @@ let tipBox = chart.append('rect')
       .attr('width', width)
       .attr('height', height)
       .attr('opacity', 0)
-      .on('mousemove', drawTooltip)
+      .on('mousemove', function() {drawTooltip("World");}) 
       .on('mouseout', removeTooltip);
+      // .on('mousemove', drawTooltip2) 
+      // .on('mouseout', removeTooltip);
 
 
   function removeTooltip() {
@@ -444,16 +303,15 @@ let tipBox = chart.append('rect')
     if (tooltipLine) tooltipLine.attr('stroke', 'none');
   }
 
-  function drawTooltip() {
+  function drawTooltip(selectedGroup) {
+    
     var year = Math.floor((xScale.invert(d3.mouse(tipBox.node())[0]) + 2.5) / 5) * 5;
+
+    var dataFilter = data_u.filter(function(d){return d.name==selectedGroup})
     
     if (year >2019 ) {year = 2019;}           
-       
-    data_u.sort((a, b) => {
-      return b.Urban_per - a.Urban_per;
-    })  
-      
-    tooltipLine.attr('stroke', 'grey')
+             
+    tooltipLine.attr('stroke', function(d){ return myColor(selectedGroup);})
       .attr('x1', xScale(year))
       .attr('x2', xScale(year))
       .attr('y1', 0)
@@ -461,29 +319,57 @@ let tipBox = chart.append('rect')
     
 
     tooltip
+      .style("background-color", function(d){ return myColor(selectedGroup);})
       .style('display', 'block')
-      // .style('left', (d3.mouse(this)[0]+400)+"px")
-      // .style('top', (d3.mouse(this)[1]+200)+"px")
-      .style('left', "20px")
-      .style('top', "200px")
-      // .style('top', "270px")
-      .html("<p style='font-size:10px'><b>Year:"+year+"</p>")
+      .style('left', (d3.mouse(tipBox.node())[0]+450)+"px")
+      .style('top', (d3.mouse(tipBox.node())[1]+100)+"px")
+      .style('color', "white")
+      .html("<p style='font-size:12px'><b>Year: "+year+"</p>")
       .selectAll()
-      .data(data_u).enter()
+      .data(dataFilter).enter()
       .append('div')
-      .style('color', function(d,i) { return color(i);})
-      .html(d=> "<p style='font-size:10px'><b>"+d[year-1960].Country_name+ "<br>%Urban: " +Math.round(d[year-1960].Urban_per*10)/10+"%, "+
-        "Urban Pop: "+Math.round(d[year-1960].Urban_pop/10000000)/100+"Bn, "+
-        "Rural Pop: "+Math.round(d[year-1960].Rural_pop/10000000)/100+"Bn<br></br></p>");
+      .style('color', "white")
+      .html(d=> "<p style='font-size:12px'><b>"+d["values"][year-1960]["Country_name"]+ "<br>%Urban: " +Math.round(d["values"][year-1960]["Urban_per"]*10)/10+"%<br><br>"+
+        "Urban Pop: "+Math.round(d["values"][year-1960]["Urban_pop"]/10000000)/100+"Bn<br>"+
+        "Rural Pop: "+Math.round(d["values"][year-1960]["Rural_pop"]/10000000)/100+"Bn<br>"+
+        "Total Pop: "+Math.round(d["values"][year-1960]["Population"]/10000000)/100+"Bn<br></br></p>");
 
-    // d3.select(this)
+    d3.select(this)
     tipBox
       .style("fill","grey")   
       .style("opacity","0.03");
 
-
-
   }
+
+    function update(selectedGroup) {
+
+      // Create new data with the selection?
+      var dataFilter = data_u.filter(function(d){return d.name==selectedGroup})
+
+      // Give these new data to update line
+      path
+          .data(dataFilter)
+          .transition()
+          .duration(1000)
+          .attr("d", d=>line(d.values))
+          .attr("stroke", function(d){ return myColor(selectedGroup) })
+
+      var year = Math.floor((xScale.invert(d3.mouse(tipBox.node())[0]) + 2.5) / 5) * 5;
+
+     tipBox
+      .on('mousemove', function() { drawTooltip(selectedGroup);}) 
+      .on('mouseout', removeTooltip);
+
+    }
+
+    d3.select("#selectButton").on("change", function(d) {
+        // recover the option that has been chosen
+        var selectedOption = d3.select(this).property("value")
+        // run the updateChart function with this selected option
+        update(selectedOption)
+    });
+
+
   
   console.log(data_u); 
   }
