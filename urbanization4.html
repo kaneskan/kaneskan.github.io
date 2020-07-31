@@ -174,8 +174,8 @@ p {
       <p><b>The percent of regional urban population from 1960 to 2019</b></p> 
       <select id="selectButton"></select>
 
-      <div id="chart"></div>  
-
+      <div id="chart"></div>
+      <div style="color:red"><b> "Hover me!"</div>
     </div>  
   </div>
 <!--   <div class="rightcolumn">
@@ -321,7 +321,7 @@ let tipBox = chart.append('rect')
     tooltip
       .style("background-color", function(d){ return myColor(selectedGroup);})
       .style('display', 'block')
-      .style('left', (d3.mouse(tipBox.node())[0]+450)+"px")
+      .style('left', (d3.mouse(tipBox.node())[0]+500)+"px")
       .style('top', (d3.mouse(tipBox.node())[1]+100)+"px")
       .style('color', "white")
       .html("<p style='font-size:12px'><b>Year: "+year+"</p>")
