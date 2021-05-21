@@ -1,1 +1,1 @@
-# kaneskan.github.io/STAT420
+# kaneskan.github.io/SMR
